@@ -159,9 +159,11 @@ export default function MovieScreen({ item }: any) {
         </Text>
       </View>
       <Cast cast={cast} />
-      <View style={{paddingLeft:15}}>
+      <View style={{ paddingLeft: 15 }}>
         <MovieList title='Related Movies' hideSeeAll={false} data={similarmovies} />
       </View>
     </ScrollView>
   );
 }
+
+// test
