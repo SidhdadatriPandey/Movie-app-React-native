@@ -5,6 +5,7 @@ import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '@/components/Cast';
 import MovieList from '@/components/MovieList';
+import Loading from '@/components/Loading';
 
 export default function MovieScreen({ item }: any) {
   const [liked, setLiked] = useState(false);
@@ -12,6 +13,7 @@ export default function MovieScreen({ item }: any) {
   const moviename = "Stree2 kljjlkjl ljljljj iijioiohkh jhk";
   const [cast, setCast] = useState<any>([1, 2, 3, 4]);
   const [similarmovies, setSimilarmovies] = useState<any>([1, 2, 3, 4, 5, 6])
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <ScrollView
@@ -62,35 +64,39 @@ export default function MovieScreen({ item }: any) {
           </TouchableOpacity>
         </SafeAreaView>
 
-        <View
-          style={{
-            backgroundColor: 'black',
-            position: 'relative',
-          }}
-        >
-          <Image
-            source={require('@/assets/images/react-logo.png')}
+        {
+          loading ? (<Loading />) : (<View
             style={{
-              height: 300,
-              width: 350,
-              borderRadius: 20,
-              marginBottom: 20,
+              backgroundColor: 'black',
+              position: 'relative',
             }}
-          />
+          >
+            <Image
+              source={require('@/assets/images/react-logo.png')}
+              style={{
+                height: 300,
+                width: 350,
+                borderRadius: 20,
+                marginBottom: 20,
+              }}
+            />
 
-          <LinearGradient
-            colors={['transparent', 'rgba(23,23,23,0)', 'rgba(23,23,23,1)']}
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              width: width,
-              height: height * 0.40,
-              borderRadius: 20,
-            }}
-            start={{ x: 0.5, y: 0 }}
-            end={{ x: 0.5, y: 1 }}
-          />
-        </View>
+            <LinearGradient
+              colors={['transparent', 'rgba(23,23,23,0)', 'rgba(23,23,23,1)']}
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                width: width,
+                height: height * 0.40,
+                borderRadius: 20,
+              }}
+              start={{ x: 0.5, y: 0 }}
+              end={{ x: 0.5, y: 1 }}
+            />
+          </View>)
+        }
+
+
 
         <View
           style={{
