@@ -1,17 +1,48 @@
 import { View, Text, SafeAreaView, StatusBar, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Entypo from '@expo/vector-icons/Entypo';
 import Feather from '@expo/vector-icons/Feather';
 import TrendingMovies from '@/components/TrendingMovies';
 import MovieList from '@/components/MovieList';
 import { router } from 'expo-router';
 import Loading from '@/components/Loading';
+import { fetchTrendingMovies, fetchUpcomingMovies } from '../api/movieDb';
 
 export default function HomeScreen() {
-  const [trending, setTrending] = useState<any>([1, 2, 3, 4, 5, 6]);
-  const [upcoming, setUpcoming] = useState<any>([1, 2, 3, 4, 5, 6]);
-  const [toprated, setToprated] = useState<any>([1, 2, 3, 4, 5, 6]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [trending, setTrending] = useState<any>([]);
+  const [upcoming, setUpcoming] = useState<any>([]);
+  const [toprated, setToprated] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    getTrendingMovies();
+    getUpcomingMovies();
+    getTopratedMovies();
+  }, [])
+
+  async function getTrendingMovies() {
+    const data = await fetchTrendingMovies();
+    // console.log(data);
+    if (data && data.results) setTrending(data.results);
+    setLoading(false);
+  }
+
+  async function getUpcomingMovies() {
+    const data = await fetchUpcomingMovies();
+    console.log("this is upcoming movie data");
+    console.log(data);
+    if (data && data.results) setUpcoming(data.results);
+    // setLoading(false);
+  }
+
+  async function getTopratedMovies() {
+    const data = await fetchUpcomingMovies();
+    console.log("this is upcoming movie data");
+    console.log(data);
+    if (data && data.results) setToprated(data.results);
+    // setLoading(false);
+  }
+
   return (
     <View style={{ padding: 10, paddingBottom: 100, backgroundColor: 'black' }}>
       <SafeAreaView style={{ paddingTop: 25, paddingHorizontal: 10 }}>
@@ -33,9 +64,9 @@ export default function HomeScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingLeft: 3 }}
         >
-          <TrendingMovies trending={trending} />
+          {trending.length > 0 && <TrendingMovies trending={trending} />}
           <MovieList title='Upcoming' hideSeeAll={true} data={upcoming} />
-          <MovieList title='Top Rated' hideSeeAll={true} data={toprated} />
+          {/* <MovieList title='Top Rated' hideSeeAll={true} data={toprated} /> */}
         </ScrollView>)
       }
     </View>)

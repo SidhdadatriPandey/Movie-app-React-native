@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React from 'react'
 import { router } from 'expo-router';
+import { fallbackMoviePoster, image185, image342 } from '@/app/api/movieDb';
 
 export default function MovieList({ title, hideSeeAll, data }: any) {
     const Moviename = "Stree 2 lllllllllllllllllllllllllllllllllll";
@@ -17,7 +18,7 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                // contentContainerStyle={{ paddingLeft: 15 }}
+            // contentContainerStyle={{ paddingLeft: 15 }}
             >
                 {
                     data.map((item: any, index: any) => {
@@ -29,8 +30,8 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
                                 <View>
                                     <View
                                         style={{
-                                            width: 150,
-                                            height: 200,
+                                            width: 180,
+                                            height: 250,
                                             backgroundColor: 'blue',
                                             justifyContent: 'center',
                                             alignItems: 'center',
@@ -39,10 +40,14 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
                                         }}
                                     >
                                         <Image
-                                            source={require('../assets/images/react-logo.png')}
+                                            // source={require('../assets/images/react-logo.png')}
+                                            source={{ uri: image185(item.poster_path) }}
+                                            style={{ height: 200, width: 180 }}
+                                            resizeMode='cover'
+                                        // resizeMode: 'contain'
                                         />
-                                        <Text style={{ color: 'white' }}>
-                                            {Moviename.length > 14 ? Moviename.slice(0, 14) + '...' : Moviename}
+                                        <Text style={{ color: 'white', marginTop: 5, fontSize: 17 }}>
+                                            {item.title.length > 14 ? item.title.slice(0, 14) + '...' : item.title}
                                         </Text>
                                     </View>
                                 </View>
