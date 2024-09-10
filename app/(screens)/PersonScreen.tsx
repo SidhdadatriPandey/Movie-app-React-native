@@ -1,14 +1,15 @@
 import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { router } from 'expo-router';
-import MovieList from '@/components/MovieList';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import Loading from '@/components/Loading';
+import { image342 } from '../api/movieDb';
 
 export default function PersonScreen() {
     const [liked, setLiked] = useState<boolean>(false);
-    const [personMovies, setPersonMovies] = useState<any>([1, 2, 3, 4, 5])
     const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
+    const { character, original_name, person_path } = useLocalSearchParams();
 
     return (
         <ScrollView
@@ -51,8 +52,10 @@ export default function PersonScreen() {
                 </TouchableOpacity>
             </SafeAreaView>
 
-            {
-                loading ? (<Loading />) : (<View>
+            {loading ? (
+                <Loading />
+            ) : (
+                <View>
                     <View style={{ alignItems: 'center', marginTop: 40, marginBottom: 10 }}>
                         <View
                             style={{
@@ -67,7 +70,7 @@ export default function PersonScreen() {
                             }}
                         >
                             <Image
-                                source={require('@/assets/images/react-logo.png')}
+                                source={person_path ? ({ uri: image342(person_path) }) : require('@/assets/images/react-logo.png')}
                                 style={{ width: 190, height: 190 }}
                             />
                         </View>
@@ -75,53 +78,14 @@ export default function PersonScreen() {
 
                     <View style={{ alignItems: 'center', marginBottom: 50 }}>
                         <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>
-                            Keanu Reeves
+                            {character}
                         </Text>
                         <Text style={{ color: 'gray', fontSize: 18 }}>
-                            London, United Kingdom
+                            {original_name}
                         </Text>
                     </View>
-
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            borderRadius: 10,
-                            padding: 10,
-                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                        }}
-                    >
-                        <View style={{ flex: 1, alignItems: 'center' }}>
-                            <Text style={{ color: 'gray', fontSize: 14 }}>Gender</Text>
-                            <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Male</Text>
-                        </View>
-                        <View style={{ flex: 1, alignItems: 'center' }}>
-                            <Text style={{ color: 'gray', fontSize: 14 }}>Birthday</Text>
-                            <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>1964-09-02</Text>
-                        </View>
-                        <View style={{ flex: 1, alignItems: 'center' }}>
-                            <Text style={{ color: 'gray', fontSize: 14 }}>Known for</Text>
-                            <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Acting</Text>
-                        </View>
-                        <View style={{ flex: 1, alignItems: 'center' }}>
-                            <Text style={{ color: 'gray', fontSize: 14 }}>Popularity</Text>
-                            <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>64.23</Text>
-                        </View>
-                    </View>
-
-                    <View style={{ paddingVertical: 20 }}>
-                        <Text style={{ color: 'white', fontSize: 30, fontWeight: 'bold' }}>Biography</Text>
-                        <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit enim necessitatibus vitae magnam nam voluptatum dolore quis praesentium quos mollitia!
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id nihil culpa totam perspiciatis corporis impedit quae nisi. Corporis fuga suscipit mollitia minima, libero assumenda ullam consequatur culpa sit aut dolorum autem! Porro odit cupiditate cum!
-                        </Text>
-                    </View>
-
-                    <MovieList title={'Movies'} hideSeeAll={true} data={personMovies} />
-                </View>)
-            }
-
-
+                </View>
+            )}
         </ScrollView>
     );
 }

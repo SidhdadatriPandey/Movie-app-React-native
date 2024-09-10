@@ -1,12 +1,11 @@
 import { View, Text, SafeAreaView, StatusBar, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Entypo from '@expo/vector-icons/Entypo';
 import Feather from '@expo/vector-icons/Feather';
 import TrendingMovies from '@/components/TrendingMovies';
 import MovieList from '@/components/MovieList';
 import { router } from 'expo-router';
 import Loading from '@/components/Loading';
-import { fetchTrendingMovies, fetchUpcomingMovies } from '../api/movieDb';
+import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from '../api/movieDb';
 
 export default function HomeScreen() {
   const [trending, setTrending] = useState<any>([]);
@@ -29,26 +28,26 @@ export default function HomeScreen() {
 
   async function getUpcomingMovies() {
     const data = await fetchUpcomingMovies();
-    console.log("this is upcoming movie data");
-    console.log(data);
+    // console.log("this is upcoming movie data");
+    // console.log(data);
     if (data && data.results) setUpcoming(data.results);
     // setLoading(false);
   }
 
   async function getTopratedMovies() {
-    const data = await fetchUpcomingMovies();
-    console.log("this is upcoming movie data");
-    console.log(data);
+    const data = await fetchTopRatedMovies();
+    // console.log("this is upcoming movie data");
+    // console.log(data);
     if (data && data.results) setToprated(data.results);
     // setLoading(false);
   }
 
   return (
     <View style={{ padding: 10, paddingBottom: 100, backgroundColor: 'black' }}>
-      <SafeAreaView style={{ paddingTop: 25, paddingHorizontal: 10 }}>
+      <SafeAreaView style={{ paddingTop: 30, paddingHorizontal: 10 }}>
         <StatusBar barStyle="light-content" />
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Entypo name="menu" size={34} color="white" />
+          {/* <Entypo name="menu" size={34} color="white" /> */}
           <View>
             <Text style={{ color: 'blue', fontSize: 40, fontWeight: 'bold' }}>
               M<Text style={{ color: 'white', fontSize: 40, fontWeight: 'bold' }}>ovies</Text>
@@ -66,9 +65,8 @@ export default function HomeScreen() {
         >
           {trending.length > 0 && <TrendingMovies trending={trending} />}
           <MovieList title='Upcoming' hideSeeAll={true} data={upcoming} />
-          {/* <MovieList title='Top Rated' hideSeeAll={true} data={toprated} /> */}
+          <MovieList title='Top Rated' hideSeeAll={true} data={toprated} />
         </ScrollView>)
       }
     </View>)
 }
-//jbjhgjhghgjh

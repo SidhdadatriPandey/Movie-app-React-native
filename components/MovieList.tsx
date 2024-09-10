@@ -1,10 +1,9 @@
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React from 'react'
 import { router } from 'expo-router';
-import { fallbackMoviePoster, image185, image342 } from '@/app/api/movieDb';
+import { image185 } from '@/app/api/movieDb';
 
 export default function MovieList({ title, hideSeeAll, data }: any) {
-    const Moviename = "Stree 2 lllllllllllllllllllllllllllllllllll";
     return (
         <View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 }}>
@@ -18,14 +17,21 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
-            // contentContainerStyle={{ paddingLeft: 15 }}
             >
                 {
                     data.map((item: any, index: any) => {
                         return (
-                            <TouchableOpacity
+                            item.poster_path && <TouchableOpacity
                                 key={index}
-                                onPress={() => router.push('/(screens)/MovieScreen')}
+                                onPress={() => router.push({
+                                    pathname: '/(screens)/MovieScreen',
+                                    params: {
+                                        title: item.title,
+                                        poster_path: item.poster_path,
+                                        release_date: item.release_date,
+                                        id: item.id
+                                    }
+                                })}
                             >
                                 <View>
                                     <View
@@ -40,11 +46,9 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
                                         }}
                                     >
                                         <Image
-                                            // source={require('../assets/images/react-logo.png')}
                                             source={{ uri: image185(item.poster_path) }}
                                             style={{ height: 200, width: 180 }}
                                             resizeMode='cover'
-                                        // resizeMode: 'contain'
                                         />
                                         <Text style={{ color: 'white', marginTop: 5, fontSize: 17 }}>
                                             {item.title.length > 14 ? item.title.slice(0, 14) + '...' : item.title}
