@@ -181,7 +181,7 @@ export default function MovieScreen() {
               );
             })}
           </View>
-        </View>
+        </View>//
 
         <Text style={{ textAlign: 'center', color: 'white', marginBottom: 20 }}>
           {movie?.overview}

@@ -14,7 +14,7 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getTrendingMovies();
+    getTrendingMovies();//
     getUpcomingMovies();
     getTopratedMovies();
   }, [])

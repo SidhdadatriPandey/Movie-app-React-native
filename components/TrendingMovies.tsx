@@ -11,7 +11,7 @@ export default function TrendingMovies({ trending }: any) {
       <Text style={{ fontSize: 22, fontWeight: 'medium', marginBottom: 10, color: 'white' }}>Trending</Text>
       <ScrollView
         horizontal
-        showsHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}//
       >
         {trending.map((item: any, index: number) => (
           <MovieCard key={index} item={item} />

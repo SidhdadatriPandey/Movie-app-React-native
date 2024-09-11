@@ -9,7 +9,22 @@ export default function PersonScreen() {
     const [liked, setLiked] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
-    const { character, original_name, person_path } = useLocalSearchParams();
+    const { character, original_name, person_path, person } = useLocalSearchParams();
+
+    useEffect(() => {
+        if (typeof person === 'string') {
+            console.log('Person details:', person);
+            try {
+                const personData = JSON.parse(person); // Only parse if `person` is a string
+                console.log(personData.original_name);
+                console.log(personData.character); // Access personData properties
+            } catch (error) {
+                console.error('Failed to parse person data:', error);
+            }
+        } else {
+            console.log('Person data is not a string or not available');
+        }
+    }, [person]);
 
     return (
         <ScrollView

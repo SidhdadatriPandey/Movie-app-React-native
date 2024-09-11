@@ -44,7 +44,9 @@ export default function Cast({ cast }: any) {
                   params: {
                     person_path: person.profile_path,
                     character: person.character,
-                    original_name: person.original_name
+                    original_name: person.original_name,
+                    // person: JSON.stringify(person),
+                    person
                   }
                 })}
               >

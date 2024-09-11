@@ -30,7 +30,7 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
                                         poster_path: item.poster_path,
                                         release_date: item.release_date,
                                         id: item.id
-                                    }
+                                    }//
                                 })}
                             >
                                 <View>

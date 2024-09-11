@@ -38,7 +38,7 @@ export default function SearchScreen() {
             });
         } else {
             setLoading(false);
-            setResults([]);
+            setResults([]);//
         }
     };
 
