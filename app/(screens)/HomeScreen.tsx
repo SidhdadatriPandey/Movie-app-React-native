@@ -43,7 +43,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={{ padding: 10, paddingBottom: 100, backgroundColor: 'black' }}>
+    <View style={{ padding: 10, paddingBottom: 160, backgroundColor: 'black' }}>
       <SafeAreaView style={{ paddingTop: 30, paddingHorizontal: 10 }}>
         <StatusBar barStyle="light-content" />
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -57,6 +57,9 @@ export default function HomeScreen() {
             <Feather name="search" size={34} color="white" />
           </TouchableOpacity>
         </View>
+        <TouchableOpacity onPress={() => router.push('/homeScreen')} style={{ backgroundColor: 'yellow', marginTop: 10 }}>
+          <Text style={{ color: 'blue', fontSize: 40, fontWeight: 'bold', textAlign: 'center' }}>PVR</Text>
+        </TouchableOpacity>
       </SafeAreaView>
       {
         loading ? (<Loading />) : (<ScrollView

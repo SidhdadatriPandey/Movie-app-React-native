@@ -6,6 +6,11 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { MovieContext } from './context1';
+import HomeScreen from './homeScreen';
+import MovieScreen from './movieScreen';
+import TheatreScreen from './theaterScreen';
+import TicketScreen from './ticketScreen';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -29,10 +34,26 @@ export default function RootLayout() {
   return (
 
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack initialRouteName="index" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(screens)" />
-        <Stack.Screen name='index' />
-      </Stack>
+      <MovieContext>
+        <Stack initialRouteName="index" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(screens)" />
+          <Stack.Screen name='index' />
+          {/* <Stack.Screen name='homeScreen' />
+        <Stack.Screen name='movieScreen' />
+        <Stack.Screen name='theaterScreen' />
+        <Stack.Screen name='tcketScreen' /> */}
+        </Stack>
+      </MovieContext>
+
+
     </ThemeProvider>
   );
 }
+
+{/* <MovieContext>
+        <Stack initialRouteName="index" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(screens)" />
+          <Stack.Screen name='index' />
+        </Stack>
+      </MovieContext> */}
+
