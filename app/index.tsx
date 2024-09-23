@@ -7,6 +7,6 @@ export default function index() {
   const router = useRouter();
 
   return (
-    <Redirect href={'../(screens)/HomeScreen'} />
+    <Redirect href={'../(screens)/WelcomeScreen'} />
   );
 };

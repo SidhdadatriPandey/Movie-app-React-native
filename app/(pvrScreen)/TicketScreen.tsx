@@ -13,6 +13,7 @@ import SvgQRCode from "react-native-qrcode-svg";
 import { router, useLocalSearchParams } from "expo-router";
 import { MoviesCards } from "../context1";
 // import { MoviesCards } from "../../context1";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const TicketScreen = () => {
     const navigation = useNavigation();
@@ -58,10 +59,10 @@ const TicketScreen = () => {
                         justifyContent: "space-between",
                     }}
                 >
-                    <Text style={{ fontSize: 16, fontWeight: "500" }}>
+                    <Text style={{ fontSize: hp(2.5), fontWeight: "500" }}>
                         {route.params.name}
                     </Text>
-                    <Text>{route.params?.selectedSeats.length}</Text>
+                    <Text style={{ fontSize: hp(2) }}>{selectedSeatsData.length}</Text>
                 </View>
 
                 <View
@@ -72,14 +73,14 @@ const TicketScreen = () => {
                         marginHorizontal: 10,
                     }}
                 >
-                    <Text style={{ fontSize: 16, color: "gray" }}>HINDI - 2D</Text>
+                    <Text style={{ fontSize: hp(2), color: "gray" }}>HINDI - 2D</Text>
 
-                    <Text style={{ color: "red", fontSize: 16 }}>PVR TICKET</Text>
+                    <Text style={{ color: "red", fontSize: hp(2) }}>PVR TICKET</Text>
                 </View>
 
                 <Text
                     style={{
-                        fontSize: 15,
+                        fontSize: hp(2),
                         fontWeight: "600",
                         marginHorizontal: 10,
                         marginTop: 9,
@@ -88,7 +89,7 @@ const TicketScreen = () => {
                     {route.params.mall}
                 </Text>
 
-                <Text
+                {/* <Text
                     style={{
                         borderRadius: 1,
                         borderStyle: "dashed",
@@ -97,23 +98,24 @@ const TicketScreen = () => {
                         borderWidth: 0.5,
                         margin: 10,
                     }}
-                />
+                /> */}
 
                 <View
                     style={{
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "space-between",
+                        marginTop: 20
                     }}
                 >
                     <View style={{ marginTop: 10, marginLeft: 10 }}>
-                        <Text style={{ color: "gray", fontSize: 15, fontWeight: "500" }}>
+                        <Text style={{ color: "gray", fontSize: hp(1.7), fontWeight: "500" }}>
                             DATE & TIME
                         </Text>
-                        <Text style={{ marginVertical: 4, fontSize: 16 }}>
+                        <Text style={{ marginVertical: 4, fontSize: hp(1.7) }}>
                             {route.params.timeSelected}
                         </Text>
-                        <Text>
+                        <Text style={{ fontSize: hp(1.7) }}>
                             {moment(new Date(route.params.date)).utc().format("MM/DD/YYYY")}
                         </Text>
                         {/* <Text>{(route.params.date)}</Text> */}
@@ -121,12 +123,12 @@ const TicketScreen = () => {
                     </View>
 
                     <Image
-                        style={{ aspectRatio: 4 / 2, height: 60, borderRadius: 6 }}
+                        style={{ aspectRatio: 4 / 2, height: hp(10), borderRadius: 6 }}
                         source={{ uri: route.params.image }}
                     />
                 </View >
 
-                <Text
+                {/* <Text
                     style={{
                         borderRadius: 1,
                         borderStyle: "dashed",
@@ -134,22 +136,24 @@ const TicketScreen = () => {
                         height: 1,
                         borderWidth: 0.5,
                         margin: 10,
+                        fontSize: hp(1.7)
                     }}
-                />
+                /> */}
 
                 <View
                     style={{
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "space-between",
+                        marginTop: 20
                     }}
                 >
                     <View style={{ marginLeft: 14 }}>
-                        <Text>AUDI NO</Text>
+                        <Text style={{ fontSize: hp(1.7) }}>AUDI NO</Text>
                         <Text
                             style={{
                                 textAlign: "center",
-                                fontSize: 15,
+                                fontSize: hp(1.7),
                                 fontWeight: "bold",
                                 marginTop: 6,
                             }}
@@ -159,13 +163,13 @@ const TicketScreen = () => {
                     </View>
 
                     <View>
-                        <Text>TICKETS</Text>
+                        <Text style={{ fontSize: hp(1.7) }}>TICKETS</Text>
                         <Text
                             style={{
                                 textAlign: "center",
-                                fontSize: 15,
                                 fontWeight: "bold",
                                 marginTop: 6,
+                                fontSize: hp(1.7)
                             }}
                         >
                             {selectedSeatsData.length}
@@ -173,7 +177,7 @@ const TicketScreen = () => {
                     </View>
 
                     <View style={{ marginRight: 15 }}>
-                        <Text>SEATS</Text>
+                        <Text style={{ fontSize: hp(1.7) }}>SEATS</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             {Array.isArray(selectedSeatsData) &&
                                 selectedSeatsData.map((item: any, index: number) => (
@@ -181,7 +185,7 @@ const TicketScreen = () => {
                                         key={index}
                                         style={{
                                             margin: 3,
-                                            fontSize: 15,
+                                            fontSize: hp(1.7),
                                             fontWeight: "bold",
                                             marginTop: 6,
                                         }}
@@ -194,7 +198,7 @@ const TicketScreen = () => {
                     </View>
                 </View>
 
-                <Text
+                {/* <Text
                     style={{
                         borderRadius: 1,
                         borderStyle: "dashed",
@@ -203,18 +207,19 @@ const TicketScreen = () => {
                         borderWidth: 0.5,
                         margin: 10,
                     }}
-                />
+                /> */}
 
                 <View
                     style={{
-                        height: 140,
+                        // height: 140,
                         backgroundColor: "#8DA399",
                         borderRadius: 6,
-                        margin: 10,
+                        marginVertical: 20,
+                        padding: 10
                     }}
                 >
                     <View style={{ padding: 10 }}>
-                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                        <Text style={{ fontSize: hp(2), fontWeight: "bold" }}>
                             Price Details
                         </Text>
                         <View
@@ -225,10 +230,10 @@ const TicketScreen = () => {
                                 marginTop: 4,
                             }}
                         >
-                            <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
+                            <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 0's Seat convenience
                             </Text>
-                            <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
+                            <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 ₹{route.params.priceValue}
                             </Text>
                         </View>
@@ -241,10 +246,10 @@ const TicketScreen = () => {
                                 marginTop: 4,
                             }}
                         >
-                            <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
+                            <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 Convenience Fee
                             </Text>
-                            <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
+                            <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 ₹87
                             </Text>
                         </View>
@@ -257,10 +262,10 @@ const TicketScreen = () => {
                                 marginTop: 4,
                             }}
                         >
-                            <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
+                            <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 Grand Total
                             </Text>
-                            <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
+                            <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 ₹{route.params.total}
                             </Text>
                         </View>
@@ -273,7 +278,7 @@ const TicketScreen = () => {
                                 marginTop: 4,
                             }}
                         >
-                            <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
+                            <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 ID NO
                             </Text>
                             <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
@@ -301,9 +306,9 @@ const TicketScreen = () => {
                         marginBottom: 20,
                     }}
                 >
-                    <SvgQRCode value={"hello"} />
+                    <SvgQRCode value={"hello"} size={hp(15)} />
                 </View>
-                <Text style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}>
+                <Text style={{ fontSize: hp(1.7), fontWeight: "500", textAlign: "center" }}>
                     W33JNK3
                 </Text>
                 <Pressable
@@ -314,10 +319,11 @@ const TicketScreen = () => {
                         width: 120,
                         borderRadius: 4,
                         padding: 10,
+                        marginTop: 10
                     }}
-                    onPress={() => router.push('/homeScreen')}
+                    onPress={() => router.push('/HomeScreen')}
                 >
-                    <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>Home</Text>
+                    <Text style={{ textAlign: "center", color: "white", fontSize: hp(1.7), }}>Home</Text>
                 </Pressable>
             </View >
         </SafeAreaView >

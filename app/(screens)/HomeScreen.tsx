@@ -57,7 +57,7 @@ export default function HomeScreen() {
             <Feather name="search" size={34} color="white" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => router.push('/homeScreen')} style={{ backgroundColor: 'yellow', marginTop: 10 }}>
+        <TouchableOpacity onPress={() => router.push('/(pvrScreen)/HomeScreen')} style={{ backgroundColor: 'yellow', marginTop: 10 }}>
           <Text style={{ color: 'blue', fontSize: 40, fontWeight: 'bold', textAlign: 'center' }}>PVR</Text>
         </TouchableOpacity>
       </SafeAreaView>

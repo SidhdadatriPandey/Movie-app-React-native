@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useContext, useEffect } from "react";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {
     StyleSheet,
     Text,
@@ -12,6 +13,7 @@ import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 // import { MoviesCards, moviesType } from "../Context1";
 import { router } from "expo-router";
+// import { moviesType } from "../context1";
 import { MoviesCards, moviesType } from "@/app/context1";
 // import { MoviesCards, moviesType } from "../../../context1";
 // import movies from "@/data/movies";
@@ -26,7 +28,7 @@ type MoviesCardsContext = {
     setMovies: any
 };
 
-const TheatreScreen: React.FC = () => {
+const TheaterScreen: React.FC = () => {
     const route: any = useRoute<any>();
     const navigation = useNavigation();
     const { seats, setSeats, occupied, movies, setMovies } = useContext(MoviesCards) as MoviesCardsContext;
@@ -34,7 +36,7 @@ const TheatreScreen: React.FC = () => {
     const onSeatSelect = (seat: string) => {
         movies.map((itm: any, index: number) => {
             if (itm.name === route.params.name) {
-                if (itm.occ1[route.params.mall].includes(seat)) return;
+                if (itm.occ1[route.params.mall]?.includes(seat)) return;
             }
         })
         if (occupied.includes(seat)) return;
@@ -71,26 +73,21 @@ const TheatreScreen: React.FC = () => {
     function handleOnPress() {
         occupied.push(...seats);
 
-        // Sample movie data logic where you update 'occ1' properly
         movies.map((itm: any, index: number) => {
             if (itm.name === route.params.name) {
-                // Access occ1 directly from itm, not itm.name
-                let temp = itm.occ1[route.params.mall] || []; // Initialize an empty array if no seats for the mall
-                console.log('before:', temp); // Log the initial seats
+                let temp = itm.occ1[route.params.mall] || [];
+                console.log('before:', temp);
 
-                // Push the selected seats into the temp array
                 temp.push(...seats);
-                console.log('after:', temp); // Log the updated seats
+                console.log('after:', temp);
                 console.log(index)
 
-                // Update the movie with the new seats
                 let updatedMovie = { ...itm, occ1: { ...itm.occ1, [route.params.mall]: temp } };
 
-                // Update the movies array by replacing the current movie
                 setMovies((prevMovies: any) => {
                     const updatedMovies = [...prevMovies];
-                    updatedMovies[index] = updatedMovie; // Replace the movie at the correct index
-                    return updatedMovies; // Return the updated array
+                    updatedMovies[index] = updatedMovie;
+                    return updatedMovies;
                 });
             }
         });
@@ -106,46 +103,14 @@ const TheatreScreen: React.FC = () => {
             selectedSeats: displaySeats,
             priceValue: priceValue,
         }
-        router.push({
-            pathname: '/ticketScreen',
+        seats.length > 0 && router.push({
+            pathname: '/TicketScreen',
             params: data
         })
         setSeats([]);
     }
-    // params: { data: JSON.stringify(data) }
-    // useEffect(() => {
-    //     console.log();
-    //     console.log('selected mall', route.params.mall);
-    //     console.log();
-    // }, []);
-    const subscribe = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/payment", {
-                method: "POST",
-                body: JSON.stringify({
-                    amount: Math.floor(total * 100),
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
 
-            const data = await response.json();
-            if (!response.ok) {
-                return Alert.alert(data.message);
-            }
-
-            const clientSecret = data.clientSecret;
-
-            occupied.push(...seats);
-            setSeats([]);
-        } catch (error: any) {
-            Alert.alert("Payment failed", error.message);
-        }
-    };
-    // console.log(typeof route.params.tableSeats);
     const tempData = route.params.tableSeats.split(",")
-    // console.log('tempData', route.params)
     return (
         <SafeAreaView style={{ paddingBottom: 330 }}>
             <View
@@ -161,18 +126,18 @@ const TheatreScreen: React.FC = () => {
                         onPress={() => navigation.goBack()}
                         style={{ marginLeft: 5 }}
                         name="arrow-back"
-                        size={24}
+                        size={hp(3)}
                         color="black"
                     />
                     <View style={{ marginLeft: 6 }}>
-                        <Text style={{ fontSize: 16, fontWeight: "600" }}>
+                        <Text style={{ fontSize: hp(2), fontWeight: "600" }}>
                             {route.params.name}
                         </Text>
                         <Text
                             style={{
                                 marginTop: 2,
                                 color: "gray",
-                                fontSize: 15,
+                                fontSize: hp(1.7),
                                 fontWeight: "500",
                             }}
                         >
@@ -181,18 +146,13 @@ const TheatreScreen: React.FC = () => {
                     </View>
                 </View>
 
-                <AntDesign
-                    style={{ marginRight: 12 }}
-                    name="sharealt"
-                    size={24}
-                    color="black"
-                />
+
             </View>
 
             <Text
                 style={{
                     textAlign: "center",
-                    fontSize: 16,
+                    fontSize: hp(2),
                     fontWeight: "bold",
                     marginTop: 10,
                 }}
@@ -203,7 +163,7 @@ const TheatreScreen: React.FC = () => {
             <Text
                 style={{
                     textAlign: "center",
-                    fontSize: 13,
+                    fontSize: hp(1.7),
                     marginTop: 10,
                     color: "gray",
                 }}
@@ -212,40 +172,52 @@ const TheatreScreen: React.FC = () => {
             </Text>
 
             <FlatList
-                numColumns={7} // Display items in 7 columns
-                data={tempData} // Seats data passed via route params
-                keyExtractor={(item) => item} // Ensure a unique key for each seat
+                numColumns={7}
+                data={tempData}
+                keyExtractor={(item) => item}
+                style={{ width: '100%' }}
                 renderItem={({ item }) => (
                     <Pressable
-                        onPress={() => onSeatSelect(item)} // Handle seat selection
+                        onPress={() => onSeatSelect(item)}
                         style={{
-                            margin: 10,
+                            margin: hp(1),
+                            width: wp(9.7),
                             borderColor: "gray",
-                            borderWidth: 0.5,
-                            borderRadius: 5,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+
                         }}
                     >
                         {/* All items will have the same background color */}
                         <View>
                             {
                                 seats.includes(item) ? (
-                                    <Text style={{ backgroundColor: "#ffc40c", padding: 8 }}>{item}</Text>
+                                    <Text style={{
+                                        backgroundColor: "#ffc40c", padding: 8, fontSize: hp(2), borderWidth: 1,
+                                        borderRadius: 5,
+                                    }}>{item}</Text>
                                 ) : (
                                     (() => {
                                         let found = false;
                                         movies.forEach((itm: any) => {
                                             if (itm.name === route.params.name) {
-                                                if (itm.occ1[route.params.mall].includes(item)) {
+                                                if (itm.occ1[route.params.mall]?.includes(item)) {
                                                     found = true;
                                                 }
                                             }
                                         });
                                         if (found) {
                                             return (
-                                                <Text style={{ backgroundColor: "#989898", padding: 8 }}>{item}</Text>
+                                                <Text style={{
+                                                    backgroundColor: "#989898", padding: 8, fontSize: hp(2), borderWidth: 1,
+                                                    borderRadius: 5,
+                                                }}>{item}</Text>
                                             );
                                         } else {
-                                            return <Text style={{ padding: 8 }}>{item}</Text>;
+                                            return <Text style={{
+                                                padding: 8, fontSize: hp(2), borderWidth: 1,
+                                                borderRadius: 5,
+                                            }}>{item}</Text>;
                                         }
                                     })()
                                 )
@@ -260,42 +232,45 @@ const TheatreScreen: React.FC = () => {
 
             <View
                 style={{
+                    width: wp(100),
                     flexDirection: "row",
                     alignItems: "center",
-                    paddingLeft: 100,
+                    justifyContent: 'center',
+                    // paddingLeft: 100,
                     marginTop: 20,
                     backgroundColor: "#D8D8D8",
                     padding: 10,
+                    gap: 15,
                 }}
             >
                 <View>
                     <FontAwesome
                         style={{ textAlign: "center", marginBottom: 4 }}
                         name="square"
-                        size={24}
+                        size={hp(3)}
                         color="#ffc40c"
                     />
-                    <Text>selected</Text>
-                </View>
-
-                <View style={{ marginHorizontal: 20 }}>
-                    <FontAwesome
-                        style={{ textAlign: "center", marginBottom: 4 }}
-                        name="square"
-                        size={24}
-                        color="white"
-                    />
-                    <Text>Vacant</Text>
+                    <Text style={{ fontSize: hp(1.7) }}>Selected</Text>
                 </View>
 
                 <View>
                     <FontAwesome
                         style={{ textAlign: "center", marginBottom: 4 }}
                         name="square"
-                        size={24}
+                        size={hp(3)}
+                        color='white'
+                    />
+                    <Text style={{ fontSize: hp(1.7) }}>Vacant</Text>
+                </View>
+
+                <View>
+                    <FontAwesome
+                        style={{ textAlign: "center", marginBottom: 4 }}
+                        name="square"
+                        size={hp(3)}
                         color="#989898"
                     />
-                    <Text>Occupied</Text>
+                    <Text style={{ fontSize: hp(1.7) }}>Occupied</Text>
                 </View>
             </View>
 
@@ -308,11 +283,11 @@ const TheatreScreen: React.FC = () => {
                 }}
             >
                 <View style={{ padding: 10 }}>
-                    <Text style={{ marginBottom: 4, fontSize: 15, fontWeight: "500" }}>
+                    <Text style={{ marginBottom: 4, fontSize: hp(1.7), fontWeight: "500" }}>
                         Show end time approx 6:51 PM
                     </Text>
 
-                    {seats.length > 0 ? showSeats() : <Text>No seats selected</Text>}
+                    {seats.length > 0 ? showSeats() : <Text style={{ fontSize: hp(1.7) }}>No seats selected</Text>}
                 </View>
 
                 <View
@@ -324,7 +299,7 @@ const TheatreScreen: React.FC = () => {
                         marginTop: 10,
                     }}
                 >
-                    <Text>Now with ticket cancellation</Text>
+                    <Text style={{ fontSize: hp(1.7) }}>Now with ticket cancellation</Text>
                 </View>
             </View>
 
@@ -339,23 +314,22 @@ const TheatreScreen: React.FC = () => {
                 }}
             >
                 {seats.length > 0 ? (
-                    <Text style={{ fontSize: 17, fontWeight: "500" }}>
+                    <Text style={{ fontSize: hp(1.7), fontWeight: "500" }}>
                         {seats.length} seat(s) selected
                     </Text>
                 ) : (
                     <Text></Text>
                 )}
-                {/* <View>{occupied.push[..seats]}</View> */}
                 <Pressable
                     onPress={() => handleOnPress()}>
-                    <Text style={{ fontSize: 17, fontWeight: "600" }}>PAY {total}</Text>
+                    <Text style={{ fontSize: hp(1.7), fontWeight: "600" }}>PAY {total}</Text>
                 </Pressable>
             </Pressable>
         </SafeAreaView>
     );
 };
 
-export default TheatreScreen;
+export default TheaterScreen;
 
 const styles = StyleSheet.create({});
 

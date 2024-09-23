@@ -221,7 +221,6 @@ const MovieContext = ({ children }: MovieContextProps) => {
     return (
         <MoviesCards.Provider value={{ seats, setSeats, occupied, setOccupied, ticket, setTicket, movies, setMovies }}>
             {children}
-
         </MoviesCards.Provider>
     );
 };
