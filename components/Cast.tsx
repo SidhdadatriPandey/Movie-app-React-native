@@ -2,20 +2,24 @@ import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { router, useRouter } from 'expo-router';
 import { fallbackMoviePoster, image185 } from '@/app/api/movieDb';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 export default function Cast({ cast }: any) {
   let characterName = "Sidhdadatri Pandey jii";
   let personName = "Sidhdadatri Pandey son of Ramswaroop Pandey";
+  console.log('cast', cast);
+
   return (
     <View style={{ marginVertical: 20 }}>
       {
         cast.length > 0 && <Text
           style={{
-            fontSize: 25,
-            fontWeight: 'bold',
+            fontSize: hp(2.5),
+            // fontWeight: 'bold',
             marginBottom: 10,
             paddingHorizontal: 15,
-            color: 'white', // Adjust color to fit the rest of your theme
+            color: 'white',
           }}
         >
           Top Cast
@@ -39,37 +43,38 @@ export default function Cast({ cast }: any) {
                   alignItems: 'center',
                   gap: 5
                 }}
+
                 onPress={() => router.push({
                   pathname: '/(screens)/PersonScreen',
                   params: {
                     person_path: person.profile_path,
                     character: person.character,
                     original_name: person.original_name,
+                    id: person.id,
                     // person: JSON.stringify(person),
-                    person
+                    // person
                   }
                 })}
               >
-                <View style={{ borderRadius: 100, overflow: 'hidden', padding: 3, backgroundColor: 'white' }}>
+                <View style={{ borderRadius: wp(100), overflow: 'hidden', padding: 3, backgroundColor: 'white', height: hp(20), width: hp(20), alignItems: 'center', justifyContent: 'center' }}>
                   <Image
-                    source={{ uri: image185(person.profile_path) }} // Use the passed profile_path or fallback to local image
-                    style={{ height: 120, width: 120 }}
-                    resizeMode="cover"
+                    source={{ uri: image185(person.profile_path) }}
+                    style={{ height: hp(19), width: hp(19), borderRadius: wp(100), resizeMode: 'stretch' }}
                   />
 
                 </View>
                 <Text
                   style={{
-                    color: 'white', // Text color for readability
-                    fontSize: 18,
+                    color: 'white',
+                    fontSize: hp(2),
                   }}
                 >
                   {person.character.length > 17 ? `${person.character.slice(0, 17)}...` : person.character}
                 </Text>
                 <Text
                   style={{
-                    color: 'white', // Text color for readability
-                    fontSize: 18,
+                    color: 'white',
+                    fontSize: hp(2),
                   }}
                 >
                   {person.original_name.length > 17 ? `${person.original_name.slice(0, 17)}...` : person.original_name}

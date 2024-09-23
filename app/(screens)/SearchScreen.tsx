@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import Entypo from '@expo/vector-icons/Entypo';
 import Loading from '@/components/Loading';
 import { image185, searchMovies } from '../api/movieDb';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 // Debounce function to avoid excessive API calls
 function debounce(func: (...args: any[]) => void, delay: number) {

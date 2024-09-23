@@ -1,7 +1,5 @@
 import { createContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
-// import HomeScreen from "./homeScreen";
-// import MovieScreen from "./movieScreen";
-// import TicketScreen from "./(pvrScreen)/ticketScreen";
+
 
 export interface moviesType {
     id: string;
@@ -18,16 +16,13 @@ export interface moviesType {
     }
 }
 
-// Define types for the context value
 interface MoviesCardsContextType {
     seats: string[];
     setSeats: Dispatch<SetStateAction<string[]>>;
-    occupied: string[];
-    setOccupied: Dispatch<SetStateAction<string[]>>;
-    ticket: any[];
-    setTicket: Dispatch<SetStateAction<any[]>>;
-    movies: any[];
-    setMovies: any;
+    ticket: string[];
+    setTicket: Dispatch<SetStateAction<string[]>>;
+    movies: moviesType[];
+    setMovies: Dispatch<SetStateAction<moviesType[]>>;
 
 }
 
@@ -214,12 +209,11 @@ const initialData = [
 ];
 const MovieContext = ({ children }: MovieContextProps) => {
     const [seats, setSeats] = useState<string[]>([]);
-    const [occupied, setOccupied] = useState<string[]>([]);
-    const [ticket, setTicket] = useState<any[]>([]);
-    const [movies, setMovies] = useState<any[]>(initialData);
+    const [ticket, setTicket] = useState<string[]>([]);
+    const [movies, setMovies] = useState<moviesType[]>(initialData);
 
     return (
-        <MoviesCards.Provider value={{ seats, setSeats, occupied, setOccupied, ticket, setTicket, movies, setMovies }}>
+        <MoviesCards.Provider value={{ seats, setSeats, ticket, setTicket, movies, setMovies }}>
             {children}
         </MoviesCards.Provider>
     );

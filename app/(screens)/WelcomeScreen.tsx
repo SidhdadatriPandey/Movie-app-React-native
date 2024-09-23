@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Animated } from 'react-native';
 import { router } from 'expo-router';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const WelcomeScreen = () => {
     const fadeAnim = new Animated.Value(0); // Initialize fade animation value
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: 50,
+        fontSize: hp(7.2),
         fontWeight: 'bold',
         color: '#FFD700', // Gold color for cinematic effect
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
@@ -59,11 +60,12 @@ const styles = StyleSheet.create({
         textShadowRadius: 10,
     },
     highlighted: {
+        fontSize: hp(7.2),
         color: '#FFF', // White color for contrast
     },
     subtitle: {
         color: '#FFF',
-        fontSize: 18,
+        fontSize: hp(2.8),
         marginTop: 10,
         fontStyle: 'italic',
     },

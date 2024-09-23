@@ -12,14 +12,12 @@ import moment from 'moment';
 import SvgQRCode from "react-native-qrcode-svg";
 import { router, useLocalSearchParams } from "expo-router";
 import { MoviesCards } from "../context1";
-// import { MoviesCards } from "../../context1";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const TicketScreen = () => {
     const navigation = useNavigation();
     const context = useContext(MoviesCards);
 
-    // Check if context is available
     if (!context) {
         throw new Error("MoviesCards context must be used within a MovieContext Provider");
     }
@@ -89,17 +87,6 @@ const TicketScreen = () => {
                     {route.params.mall}
                 </Text>
 
-                {/* <Text
-                    style={{
-                        borderRadius: 1,
-                        borderStyle: "dashed",
-                        borderColor: "#DCDCDC",
-                        height: 1,
-                        borderWidth: 0.5,
-                        margin: 10,
-                    }}
-                /> */}
-
                 <View
                     style={{
                         flexDirection: "row",
@@ -115,30 +102,14 @@ const TicketScreen = () => {
                         <Text style={{ marginVertical: 4, fontSize: hp(1.7) }}>
                             {route.params.timeSelected}
                         </Text>
-                        <Text style={{ fontSize: hp(1.7) }}>
-                            {moment(new Date(route.params.date)).utc().format("MM/DD/YYYY")}
-                        </Text>
-                        {/* <Text>{(route.params.date)}</Text> */}
 
                     </View>
 
                     <Image
-                        style={{ aspectRatio: 4 / 2, height: hp(10), borderRadius: 6 }}
+                        style={{ aspectRatio: 4 / 2, height: hp(12), borderRadius: 6, resizeMode: 'stretch' }}
                         source={{ uri: route.params.image }}
                     />
                 </View >
-
-                {/* <Text
-                    style={{
-                        borderRadius: 1,
-                        borderStyle: "dashed",
-                        borderColor: "#DCDCDC",
-                        height: 1,
-                        borderWidth: 0.5,
-                        margin: 10,
-                        fontSize: hp(1.7)
-                    }}
-                /> */}
 
                 <View
                     style={{
@@ -197,17 +168,6 @@ const TicketScreen = () => {
                         </View>
                     </View>
                 </View>
-
-                {/* <Text
-                    style={{
-                        borderRadius: 1,
-                        borderStyle: "dashed",
-                        borderColor: "#DCDCDC",
-                        height: 1,
-                        borderWidth: 0.5,
-                        margin: 10,
-                    }}
-                /> */}
 
                 <View
                     style={{

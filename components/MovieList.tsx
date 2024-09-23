@@ -2,15 +2,17 @@ import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React from 'react'
 import { router } from 'expo-router';
 import { image185 } from '@/app/api/movieDb';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 export default function MovieList({ title, hideSeeAll, data }: any) {
     return (
         <View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 }}>
-                <Text style={{ fontSize: 22, fontWeight: 'medium', marginBottom: 10, color: 'white' }}>{title}</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: hp(1) }}>
+                <Text style={{ fontSize: hp(2.5), fontWeight: 'medium', marginBottom: 10, color: 'white' }}>{title}</Text>
                 {
                     hideSeeAll && <TouchableOpacity>
-                        <Text style={{ fontSize: 22, fontWeight: 'medium', marginBottom: 10, color: 'white' }}>See All</Text>
+                        <Text style={{ fontSize: hp(2.5), fontWeight: 'medium', marginBottom: 10, color: 'white' }}>See All</Text>
                     </TouchableOpacity>
                 }
             </View>
@@ -36,21 +38,21 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
                                 <View>
                                     <View
                                         style={{
-                                            width: 180,
-                                            height: 250,
+                                            width: wp(45),
+                                            height: hp(32),
                                             backgroundColor: 'blue',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            marginRight: 10, // Adds spacing between cards
-                                            borderRadius: 10, // Optional: Add border radius for rounded corners
+                                            marginRight: 10,
+                                            borderRadius: 10,
                                         }}
                                     >
                                         <Image
                                             source={{ uri: image185(item.poster_path) }}
-                                            style={{ height: 200, width: 180 }}
-                                            resizeMode='cover'
+                                            style={{ height: hp(27), width: wp(45), resizeMode: 'stretch' }}
+                                        // resizeMode='cover'
                                         />
-                                        <Text style={{ color: 'white', marginTop: 5, fontSize: 17 }}>
+                                        <Text style={{ color: 'white', marginTop: 5, fontSize: hp(2) }}>
                                             {item.title.length > 14 ? item.title.slice(0, 14) + '...' : item.title}
                                         </Text>
                                     </View>

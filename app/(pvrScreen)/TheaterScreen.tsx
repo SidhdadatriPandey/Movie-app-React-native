@@ -11,27 +11,22 @@ import {
 } from "react-native";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-// import { MoviesCards, moviesType } from "../Context1";
 import { router } from "expo-router";
-// import { moviesType } from "../context1";
 import { MoviesCards, moviesType } from "@/app/context1";
-// import { MoviesCards, moviesType } from "../../../context1";
-// import movies from "@/data/movies";
 
 
 // Define context type for MoviesCards
 type MoviesCardsContext = {
     seats: string[];
     setSeats: Dispatch<SetStateAction<string[]>>;
-    occupied: string[]; // Keeping occupied as string[]
     movies: moviesType[];
-    setMovies: any
+    setMovies: Dispatch<SetStateAction<moviesType[]>>
 };
 
 const TheaterScreen: React.FC = () => {
     const route: any = useRoute<any>();
     const navigation = useNavigation();
-    const { seats, setSeats, occupied, movies, setMovies } = useContext(MoviesCards) as MoviesCardsContext;
+    const { seats, setSeats, movies, setMovies } = useContext(MoviesCards) as MoviesCardsContext;
 
     const onSeatSelect = (seat: string) => {
         movies.map((itm: any, index: number) => {
@@ -39,7 +34,6 @@ const TheaterScreen: React.FC = () => {
                 if (itm.occ1[route.params.mall]?.includes(seat)) return;
             }
         })
-        if (occupied.includes(seat)) return;
         const seatSelected = seats.includes(seat);
         if (seatSelected) {
             setSeats(seats.filter((s) => s !== seat));
@@ -71,16 +65,15 @@ const TheaterScreen: React.FC = () => {
 
 
     function handleOnPress() {
-        occupied.push(...seats);
 
         movies.map((itm: any, index: number) => {
             if (itm.name === route.params.name) {
                 let temp = itm.occ1[route.params.mall] || [];
-                console.log('before:', temp);
+                // console.log('before:', temp);
 
                 temp.push(...seats);
-                console.log('after:', temp);
-                console.log(index)
+                // console.log('after:', temp);
+                // console.log(index)
 
                 let updatedMovie = { ...itm, occ1: { ...itm.occ1, [route.params.mall]: temp } };
 

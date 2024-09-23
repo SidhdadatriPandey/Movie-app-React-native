@@ -6,6 +6,7 @@ import MovieList from '@/components/MovieList';
 import { router } from 'expo-router';
 import Loading from '@/components/Loading';
 import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from '../api/movieDb';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function HomeScreen() {
   const [trending, setTrending] = useState<any>([]);
@@ -49,16 +50,16 @@ export default function HomeScreen() {
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* <Entypo name="menu" size={34} color="white" /> */}
           <View>
-            <Text style={{ color: 'blue', fontSize: 40, fontWeight: 'bold' }}>
-              M<Text style={{ color: 'white', fontSize: 40, fontWeight: 'bold' }}>ovies</Text>
+            <Text style={{ color: 'blue', fontSize: hp(4.2), fontWeight: 'bold' }}>
+              M<Text style={{ color: 'white', fontSize: hp(4.2), fontWeight: 'bold' }}>ovies</Text>
             </Text>
           </View>
           <TouchableOpacity onPress={() => router.push('/(screens)/SearchScreen')}>
-            <Feather name="search" size={34} color="white" />
+            <Feather name="search" size={hp(3.5)} color="white" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => router.push('/(pvrScreen)/HomeScreen')} style={{ backgroundColor: 'yellow', marginTop: 10 }}>
-          <Text style={{ color: 'blue', fontSize: 40, fontWeight: 'bold', textAlign: 'center' }}>PVR</Text>
+        <TouchableOpacity onPress={() => router.push('/(pvrScreen)/HomeScreen')} style={{ backgroundColor: 'yellow', marginTop: 10, borderRadius: 10 }}>
+          <Text style={{ color: 'blue', fontSize: hp(3.5), fontWeight: 'bold', textAlign: 'center' }}>BOOK PVR</Text>
         </TouchableOpacity>
       </SafeAreaView>
       {

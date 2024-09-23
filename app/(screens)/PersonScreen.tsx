@@ -3,28 +3,40 @@ import React, { useEffect, useState } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import Loading from '@/components/Loading';
-import { image342 } from '../api/movieDb';
+import { fetchPersonDetails, fetchPersonMovies, image342 } from '../api/movieDb';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import MovieList from '@/components/MovieList';
 
 export default function PersonScreen() {
     const [liked, setLiked] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const [person, setPerson] = useState<any>([]);
+    const [personMovies, setPersonMovies] = useState<any>([])
     const router = useRouter();
-    const { character, original_name, person_path, person } = useLocalSearchParams();
+    const { character, original_name, person_path, id } = useLocalSearchParams();
 
     useEffect(() => {
-        if (typeof person === 'string') {
-            console.log('Person details:', person);
-            try {
-                const personData = JSON.parse(person); // Only parse if `person` is a string
-                console.log(personData.original_name);
-                console.log(personData.character); // Access personData properties
-            } catch (error) {
-                console.error('Failed to parse person data:', error);
-            }
-        } else {
-            console.log('Person data is not a string or not available');
-        }
-    }, [person]);
+        setLoading(true);
+        getParsonDetails(id);
+        getPersonMovies(id);
+    },
+        []);
+
+    async function getParsonDetails(id: any) {
+        const data = await fetchPersonDetails(id);
+        // console.log('get person detail ', data);
+        setPerson(data);
+        setLoading(false);
+    }
+
+    async function getPersonMovies(id: any) {
+        const data = await fetchPersonMovies(id);
+        // console.log('get person movies', data); 
+        console.log('get person movies cast only', data.cast);
+        console.log(typeof (data.cast));
+        if (data && data.cast) setPersonMovies(data.cast)
+        setLoading(false);
+    }
 
     return (
         <ScrollView
@@ -53,7 +65,7 @@ export default function PersonScreen() {
                     }}
                     onPress={() => router.back()}
                 >
-                    <AntDesign name="caretleft" size={30} color="white" />
+                    <AntDesign name="caretleft" size={hp(4)} color="white" />
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -63,7 +75,7 @@ export default function PersonScreen() {
                     }}
                     onPress={() => setLiked(!liked)}
                 >
-                    <AntDesign name="heart" size={30} color={liked ? "red" : "white"} />
+                    <AntDesign name="heart" size={hp(4)} color={liked ? "red" : "white"} />
                 </TouchableOpacity>
             </SafeAreaView>
 
@@ -74,33 +86,72 @@ export default function PersonScreen() {
                     <View style={{ alignItems: 'center', marginTop: 40, marginBottom: 10 }}>
                         <View
                             style={{
-                                borderRadius: 100,
-                                overflow: 'hidden',
-                                padding: 3,
-                                backgroundColor: 'white',
-                                width: 210,
-                                height: 210,
+                                borderRadius: wp(100),
+                                // overflow: 'hidden',
+                                // padding: 3,
+                                backgroundColor: 'blue',
+                                width: hp(28),
+                                height: hp(28),
                                 alignItems: 'center',
                                 justifyContent: 'center',
+
                             }}
                         >
                             <Image
                                 source={person_path ? ({ uri: image342(person_path) }) : require('@/assets/images/react-logo.png')}
-                                style={{ width: 190, height: 190 }}
+                                style={{ width: hp(25), height: hp(25), resizeMode: 'stretch', borderRadius: wp(100), }}
                             />
                         </View>
                     </View>
 
                     <View style={{ alignItems: 'center', marginBottom: 50 }}>
-                        <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>
+                        <Text style={{ color: 'white', fontSize: hp(4), fontWeight: 'bold' }}>
                             {character}
                         </Text>
-                        <Text style={{ color: 'gray', fontSize: 18 }}>
+                        <Text style={{ color: 'gray', fontSize: hp(2.5) }}>
                             {original_name}
                         </Text>
+                        <Text style={{ color: 'gray', fontSize: hp(2.5) }}>
+                            {person?.place_of_birth}
+                        </Text>
                     </View>
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                        <View>
+                            <Text style={{ color: 'white', fontSize: hp(2.2) }}>Gender</Text>
+                            <Text style={{ color: 'gray', fontSize: hp(2), textAlign: 'center' }}>
+                                {person?.gender == 1 ? 'Female' : 'Male'}
+                            </Text>
+                        </View>
+                        <View>
+                            <Text style={{ color: 'white', fontSize: hp(2.2) }}>Birthday</Text>
+                            <Text style={{ color: 'gray', fontSize: hp(2), textAlign: 'center' }}>
+                                {person?.birthday}
+                            </Text>
+                        </View>
+                        <View>
+                            <Text style={{ color: 'white', fontSize: hp(2.2) }}>Known for</Text>
+                            <Text style={{ color: 'gray', fontSize: hp(2), textAlign: 'center' }}>
+                                {person?.known_for_department}
+                            </Text>
+                        </View>
+                        <View>
+                            <Text style={{ color: 'white', fontSize: hp(2.2) }}>Popularity</Text>
+                            <Text style={{ color: 'gray', fontSize: hp(2), textAlign: 'center' }}>
+                                {person?.popularity?.toFixed(2)} %
+                            </Text>
+                        </View>
+                    </View>
+
+                    <View style={{ marginVertical: 14 }}>
+                        <Text style={{ color: 'white', fontSize: hp(3) }}>Biography</Text>
+                        <Text style={{ color: 'gray', fontSize: hp(1.8) }}>{person?.biography}</Text>
+                    </View>
+                    {/* <MovieList title={'Movie'} hideSeeAll={true} person={personMovies} /> */}
                 </View>
+
             )}
+
         </ScrollView>
     );
 }

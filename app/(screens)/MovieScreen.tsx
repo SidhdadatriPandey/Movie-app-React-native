@@ -7,6 +7,7 @@ import Cast from '@/components/Cast';
 import MovieList from '@/components/MovieList';
 import Loading from '@/components/Loading';
 import { fetchMovieCredits, fetchMovieDetails, fetchSimilarMovie, image185 } from '../api/movieDb';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function MovieScreen() {
   const [liked, setLiked] = useState(false);
@@ -97,7 +98,7 @@ export default function MovieScreen() {
             }}
             onPress={() => router.back()}
           >
-            <AntDesign name="caretleft" size={30} color="white" />
+            <AntDesign name="caretleft" size={hp(4)} color="white" />
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -107,7 +108,7 @@ export default function MovieScreen() {
             }}
             onPress={() => setLiked(!liked)}
           >
-            <AntDesign name="heart" size={30} color={liked ? "red" : "white"} />
+            <AntDesign name="heart" size={hp(4)} color={liked ? "red" : "white"} />
           </TouchableOpacity>
         </SafeAreaView>
 
@@ -118,14 +119,15 @@ export default function MovieScreen() {
             <Image
               source={{ uri: image185(poster_path) }}
               style={{
-                height: 300,
-                width: 350,
+                height: hp(50),
+                width: wp(80),
                 borderRadius: 20,
                 marginBottom: 20,
+                resizeMode: 'stretch'
               }}
             />
 
-            <LinearGradient
+            {/* <LinearGradient
               colors={['transparent', 'rgba(23,23,23,0)', 'rgba(23,23,23,1)']}
               style={{
                 position: 'absolute',
@@ -136,7 +138,7 @@ export default function MovieScreen() {
               }}
               start={{ x: 0.5, y: 0 }}
               end={{ x: 0.5, y: 1 }}
-            />
+            /> */}
           </View>
         )}
 
@@ -144,7 +146,7 @@ export default function MovieScreen() {
           <Text
             style={{
               color: 'white',
-              fontSize: 28,
+              fontSize: hp(3),
               fontWeight: 'bold',
               textAlign: 'center',
               marginBottom: 10,
@@ -156,7 +158,7 @@ export default function MovieScreen() {
             <Text
               style={{
                 color: 'gray',
-                fontSize: 18,
+                fontSize: hp(2.2),
                 marginBottom: 20,
               }}
             >
@@ -172,7 +174,7 @@ export default function MovieScreen() {
                   key={index}
                   style={{
                     color: 'white',
-                    fontSize: 20,
+                    fontSize: hp(2),
                     marginHorizontal: 5,
                   }}
                 >
@@ -181,9 +183,9 @@ export default function MovieScreen() {
               );
             })}
           </View>
-        </View>//
+        </View>
 
-        <Text style={{ textAlign: 'center', color: 'white', marginBottom: 20 }}>
+        <Text style={{ textAlign: 'center', color: 'white', marginBottom: 20, fontSize: hp(1.8) }}>
           {movie?.overview}
         </Text>
       </View>
