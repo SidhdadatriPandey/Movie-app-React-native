@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, SafeAreaView, TouchableOpacity, Image, Dimensions, Text } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router, useLocalSearchParams } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '@/components/Cast';
 import MovieList from '@/components/MovieList';
 import Loading from '@/components/Loading';
@@ -11,7 +10,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 export default function MovieScreen() {
   const [liked, setLiked] = useState(false);
-  const { height, width } = Dimensions.get('window');
 
   const [cast, setCast] = useState<any>([]);
   const [similarmovies, setSimilarmovies] = useState<any>([]);
@@ -67,8 +65,8 @@ export default function MovieScreen() {
   return (
     <ScrollView
       contentContainerStyle={{
-        paddingBottom: 20,
-        paddingTop: 45,
+        paddingBottom: hp(2),
+        paddingTop: hp(2.7),
         backgroundColor: 'black',
       }}
     >
@@ -78,7 +76,8 @@ export default function MovieScreen() {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 16,
+          paddingTop: hp(2.4),
+          paddingHorizontal: hp(1.5)
         }}
       >
         <SafeAreaView
@@ -87,14 +86,14 @@ export default function MovieScreen() {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: 20,
+            marginBottom: hp(2),
           }}
         >
           <TouchableOpacity
             style={{
-              padding: 10,
+              padding: hp(1.5),
               backgroundColor: 'rgba(0, 122, 255, 0.8)',
-              borderRadius: 100,
+              borderRadius: wp(100),
             }}
             onPress={() => router.back()}
           >
@@ -102,9 +101,9 @@ export default function MovieScreen() {
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              padding: 10,
+              padding: hp(1.5),
               backgroundColor: 'rgba(0, 122, 255, 0.8)',
-              borderRadius: 100,
+              borderRadius: wp(100),
             }}
             onPress={() => setLiked(!liked)}
           >
@@ -120,25 +119,12 @@ export default function MovieScreen() {
               source={{ uri: image185(poster_path) }}
               style={{
                 height: hp(50),
-                width: wp(80),
-                borderRadius: 20,
-                marginBottom: 20,
+                width: wp(100),
+                borderRadius: hp(1.5),
+                marginBottom: hp(1.5),
                 resizeMode: 'stretch'
               }}
             />
-
-            {/* <LinearGradient
-              colors={['transparent', 'rgba(23,23,23,0)', 'rgba(23,23,23,1)']}
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                width: width,
-                height: height * 0.4,
-                borderRadius: 20,
-              }}
-              start={{ x: 0.5, y: 0 }}
-              end={{ x: 0.5, y: 1 }}
-            /> */}
           </View>
         )}
 
@@ -149,7 +135,7 @@ export default function MovieScreen() {
               fontSize: hp(3),
               fontWeight: 'bold',
               textAlign: 'center',
-              marginBottom: 10,
+              marginBottom: hp(1),
             }}
           >
             {title}
@@ -159,7 +145,7 @@ export default function MovieScreen() {
               style={{
                 color: 'gray',
                 fontSize: hp(2.2),
-                marginBottom: 20,
+                marginBottom: hp(1),
               }}
             >
               Released: {release_date}
@@ -174,8 +160,9 @@ export default function MovieScreen() {
                   key={index}
                   style={{
                     color: 'white',
-                    fontSize: hp(2),
-                    marginHorizontal: 5,
+                    fontSize: hp(2.3),
+                    marginHorizontal: hp(.5),
+                    fontWeight: 'medium'
                   }}
                 >
                   {genre?.name} {showDot ? ' * ' : null}
@@ -185,14 +172,15 @@ export default function MovieScreen() {
           </View>
         </View>
 
-        <Text style={{ textAlign: 'center', color: 'white', marginBottom: 20, fontSize: hp(1.8) }}>
+        <Text style={{ textAlign: 'center', color: 'white', marginBottom: hp(1), fontSize: hp(1.8) }}>
           {movie?.overview}
         </Text>
       </View>
-      {
-        cast && <Cast cast={cast} />
-      }
-      <View style={{ paddingLeft: 15 }}>
+
+      <View style={{ paddingLeft: hp(1) }}>
+        {
+          cast && <Cast cast={cast} />
+        }
         {similarmovies.length > 0 && <MovieList title="Related Movies" hideSeeAll={false} data={similarmovies} />}
       </View>
     </ScrollView>

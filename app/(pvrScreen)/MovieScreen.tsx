@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-    StyleSheet,
     Text,
     View,
     SafeAreaView,
@@ -11,7 +10,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import malls from "@/data/malls";
 import { router } from "expo-router";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 type Mall = {
     name: string;
@@ -33,7 +32,6 @@ interface TheaterScreenParams {
     image: string;
 }
 
-
 const MovieScreen = () => {
     const route = useRoute();
     const [selectedDate, setSelectedDate] = useState<string>("");
@@ -41,13 +39,14 @@ const MovieScreen = () => {
     const [seatsData, setSeatsData] = useState<string[]>([]);
     const mallsData: Mall[] = malls;
     const routeParams = route.params as RouteParams;
+
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.headerLeft}>
+        <SafeAreaView style={{ flex: 1, padding: hp(1), paddingTop: hp(4.5) }}>
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <Ionicons
                         onPress={() => router.back()}
-                        style={styles.backIcon}
+                        style={{ marginLeft: hp(.3) }}
                         name="arrow-back"
                         size={hp(3)}
                         color="black"
@@ -55,9 +54,9 @@ const MovieScreen = () => {
                 </View>
             </View>
 
-            <View style={styles.safetyInfo}>
+            <View style={{ flexDirection: "row", alignItems: "center", marginTop: hp(1), marginLeft: hp(.3) }}>
                 <AntDesign name="Safety" size={hp(3)} color="orange" />
-                <Text style={styles.safetyText}>Your safety is our priority</Text>
+                <Text style={{ paddingTop: hp(.3), paddingLeft: hp(.3), fontSize: hp(1.7) }}>Your safety is our priority</Text>
             </View>
 
             {mallsData.map((item, index) => (
@@ -66,10 +65,10 @@ const MovieScreen = () => {
                         setSelectedMall(item.name);
                         setSeatsData(item?.tableData);
                     }}
-                    style={styles.mallItem}
+                    style={{ margin: hp(1) }}
                     key={index}
                 >
-                    <Text style={styles.mallName}>{item.name}</Text>
+                    <Text style={{ fontSize: hp(2), fontWeight: "500", marginTop: hp(1) }}>{item.name}</Text>
                     {selectedMall === item.name ? (
                         <FlatList
                             numColumns={3}
@@ -92,11 +91,21 @@ const MovieScreen = () => {
                                             params: data as Record<string, any>,
                                         });
                                     }}
-
-                                    style={styles.showtimeItem}
+                                    style={{
+                                        borderColor: "green",
+                                        borderWidth: hp(.2),
+                                        width: hp(10),
+                                        borderRadius: 3,
+                                        margin: hp(1),
+                                        padding: hp(.5),
+                                    }}
                                 >
-
-                                    <Text style={styles.showtimeText}>{item}</Text>
+                                    <Text style={{
+                                        fontSize: hp(1.7),
+                                        color: "green",
+                                        fontWeight: "500",
+                                        textAlign: "center",
+                                    }}>{item}</Text>
                                 </Pressable>
                             )}
                         />
@@ -108,70 +117,3 @@ const MovieScreen = () => {
 };
 
 export default MovieScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-        paddingTop: 40,
-
-    },
-    header: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    headerLeft: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    headerRight: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginRight: 10,
-    },
-    backIcon: {
-        marginLeft: 5,
-    },
-    safetyInfo: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginTop: 10,
-        marginLeft: 5,
-    },
-    safetyText: {
-        paddingTop: 4,
-        paddingLeft: 4,
-        fontSize: hp(1.7)
-    },
-    selectedItemTextStyle: {
-        fontSize: hp(2)
-    },
-    unselectedItemTextStyle: {
-        fontSize: hp(2)
-    },
-    flatListContainerStyle: {
-    },
-    mallItem: {
-        margin: 10,
-    },
-    mallName: {
-        fontSize: hp(2),
-        fontWeight: "500",
-        marginTop: 15
-    },
-    showtimeItem: {
-        borderColor: "green",
-        borderWidth: 0.5,
-        width: 93,
-        borderRadius: 3,
-        margin: 10,
-        padding: 5,
-    },
-    showtimeText: {
-        fontSize: hp(1.5),
-        color: "green",
-        fontWeight: "500",
-        textAlign: "center",
-    },
-});

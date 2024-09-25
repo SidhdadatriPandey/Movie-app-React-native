@@ -1,6 +1,5 @@
 import { image500 } from '@/app/api/movieDb';
 import { router } from 'expo-router';
-import React, { useEffect } from 'react';
 import { View, Text, Dimensions, ScrollView, TouchableWithoutFeedback, Image } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -10,12 +9,11 @@ export default function TrendingMovies({ trending }: any) {
   return (
     <View style={{ marginVertical: hp(1) }}>
       <View style={{ marginVertical: hp(1) }}>
-        <Text style={{ fontSize: hp(2.5), fontWeight: 'medium', marginBottom: 10, color: 'white', }}>Trending</Text>
-
+        <Text style={{ fontSize: hp(2.5), fontWeight: 'medium', marginBottom: hp(1), color: 'white', }}>Trending</Text>
       </View>
       <ScrollView
         horizontal
-        showsHorizontalScrollIndicator={false}//
+        showsHorizontalScrollIndicator={false}
       >
         {trending.map((item: any, index: number) => (
           <MovieCard key={index} item={item} />
@@ -41,10 +39,9 @@ const MovieCard = ({ item }: any) => {
         backgroundColor: 'blue',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 5,
-        marginRight: 10,
-        borderRadius: 10,
-
+        padding: hp(.5),
+        marginRight: hp(1),
+        borderRadius: hp(1),
       }}>
         <View
           style={{

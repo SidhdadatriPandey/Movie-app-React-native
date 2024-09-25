@@ -33,14 +33,14 @@ const Header = () => {
 
     return (
         <View>
-            <View style={{ marginTop: 3 }} />
+            <View style={{ marginTop: hp(.1) }} />
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
             >
-                <View style={{ flexDirection: 'row', justifyContent: 'center', width: wp(100) }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', width: wp(95) }}>
                     {types.map((item, index) => (
-                        <View style={{ margin: wp(1.3), borderColor: "C0C0C0", borderWidth: 0.4, borderRadius: 4, padding: 10 }} key={index}>
+                        <View style={{ margin: wp(1.3), borderColor: "C0C0C0", borderWidth: hp(.1), borderRadius: hp(.2), padding: hp(1) }} key={index}>
                             <Text style={{ textAlign: "center", fontSize: hp(1.7), fontWeight: "500" }}>{item.name}</Text>
                         </View>
                     ))}

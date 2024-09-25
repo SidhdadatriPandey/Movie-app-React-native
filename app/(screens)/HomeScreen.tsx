@@ -44,11 +44,10 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={{ padding: 10, paddingBottom: 160, backgroundColor: 'black' }}>
-      <SafeAreaView style={{ paddingTop: 30, paddingHorizontal: 10 }}>
+    <View style={{ padding: hp(.7), paddingBottom: hp(17), backgroundColor: 'black' }}>
+      <SafeAreaView style={{ paddingTop: hp(4), paddingHorizontal: hp(1) }}>
         <StatusBar barStyle="light-content" />
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          {/* <Entypo name="menu" size={34} color="white" /> */}
           <View>
             <Text style={{ color: 'blue', fontSize: hp(4.2), fontWeight: 'bold' }}>
               M<Text style={{ color: 'white', fontSize: hp(4.2), fontWeight: 'bold' }}>ovies</Text>
@@ -58,14 +57,14 @@ export default function HomeScreen() {
             <Feather name="search" size={hp(3.5)} color="white" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => router.push('/(pvrScreen)/HomeScreen')} style={{ backgroundColor: 'yellow', marginTop: 10, borderRadius: 10 }}>
+        <TouchableOpacity onPress={() => router.push('/(pvrScreen)/HomeScreen')} style={{ backgroundColor: 'yellow', marginTop: hp(1), borderRadius: hp(1) }}>
           <Text style={{ color: 'blue', fontSize: hp(3.5), fontWeight: 'bold', textAlign: 'center' }}>BOOK PVR</Text>
         </TouchableOpacity>
       </SafeAreaView>
       {
         loading ? (<Loading />) : (<ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingLeft: 3 }}
+          contentContainerStyle={{ paddingLeft: hp(.3) }}
         >
           {trending.length > 0 && <TrendingMovies trending={trending} />}
           <MovieList title='Upcoming' hideSeeAll={true} data={upcoming} />

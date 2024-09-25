@@ -6,13 +6,14 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 
 export default function MovieList({ title, hideSeeAll, data }: any) {
+    // console.log(data);
     return (
         <View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: hp(1) }}>
-                <Text style={{ fontSize: hp(2.5), fontWeight: 'medium', marginBottom: 10, color: 'white' }}>{title}</Text>
+                <Text style={{ fontSize: hp(2.5), fontWeight: 'medium', marginBottom: hp(.7), color: 'white' }}>{title}</Text>
                 {
                     hideSeeAll && <TouchableOpacity>
-                        <Text style={{ fontSize: hp(2.5), fontWeight: 'medium', marginBottom: 10, color: 'white' }}>See All</Text>
+                        <Text style={{ fontSize: hp(2.5), fontWeight: 'medium', marginBottom: hp(.7), color: 'white' }}>See All</Text>
                     </TouchableOpacity>
                 }
             </View>
@@ -21,7 +22,7 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
                 showsHorizontalScrollIndicator={false}
             >
                 {
-                    data.map((item: any, index: any) => {
+                    data?.map((item: any, index: any) => {
                         return (
                             item.poster_path && <TouchableOpacity
                                 key={index}
@@ -43,14 +44,13 @@ export default function MovieList({ title, hideSeeAll, data }: any) {
                                             backgroundColor: 'blue',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            marginRight: 10,
-                                            borderRadius: 10,
+                                            marginRight: hp(1),
+                                            borderRadius: hp(1),
                                         }}
                                     >
                                         <Image
                                             source={{ uri: image185(item.poster_path) }}
                                             style={{ height: hp(27), width: wp(45), resizeMode: 'stretch' }}
-                                        // resizeMode='cover'
                                         />
                                         <Text style={{ color: 'white', marginTop: 5, fontSize: hp(2) }}>
                                             {item.title.length > 14 ? item.title.slice(0, 14) + '...' : item.title}

@@ -6,6 +6,7 @@ import {
     Pressable,
     Image,
     SafeAreaView,
+    StatusBar,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { router } from "expo-router";
@@ -21,11 +22,12 @@ const HomeScreen = () => {
     const data = movies;
 
     return (
-        <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width: '100%', margin: 20 }}>
+        <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center', width: '100%', padding: hp(1.3), paddingTop: hp(4.5) }}>
+            <StatusBar barStyle="light-content" backgroundColor="gray" />
             <Ionicons
                 onPress={() => router.push('/(screens)/HomeScreen')}
                 style={{
-                    marginLeft: 5,
+                    marginLeft: hp(.3),
                     fontWeight: 'bold',
                     width: '100%',
                 }}
@@ -38,19 +40,21 @@ const HomeScreen = () => {
                 numColumns={2}
                 ListHeaderComponent={ticket.length > 0 ? <TicketComponent /> : <Header />}
                 data={data}
-                style={{ width: "100%" }}
+                style={{ width: "100%", }}
                 contentContainerStyle={{
                 }}
                 renderItem={({ item }) => (
-
                     <Pressable style={{
                         width: "50%",
-                        marginBottom: 15
+                        marginBottom: hp(1.4),
+                        // backgroundColor: 'blue',
+                        alignItems: 'center'
                     }}>
-                        <View style={{ width: '80%' }}>
+                        <View style={{ width: '97%' }}>
                             <View style={{
-                                aspectRatio: 1,
+                                // aspectRatio: 1,
                                 width: "100%",
+                                height: hp(28),
                                 overflow: 'hidden',
                             }}>
                                 <Image
@@ -68,17 +72,20 @@ const HomeScreen = () => {
                                     fontSize: hp(2),
                                     fontWeight: "600",
                                     // width: 170,
-                                    marginTop: 10,
+                                    marginTop: hp(1),
                                 }}
                             >
                                 {item.name.substring(0, 16)}
                             </Text>
 
-                            <Text style={{ marginTop: 4, fontSize: hp(1.7), color: "gray" }}>
+                            <Text style={{ marginTop: hp(.3), fontSize: hp(1.7), color: "gray" }}>
                                 U/A • {item.language}
                             </Text>
 
-                            <Text style={{ marginTop: 4, fontSize: hp(1.7), fontWeight: "500" }}>
+                            <Text style={{
+                                marginTop: hp(.3)
+                                , fontSize: hp(1.7), fontWeight: "500"
+                            }}>
                                 {item.genre}
                             </Text>
 
@@ -95,11 +102,11 @@ const HomeScreen = () => {
 
                                 style={{
                                     backgroundColor: "#ffc40c",
-                                    padding: 10,
-                                    borderRadius: 6,
-                                    marginRight: 10,
-                                    width: 100,
-                                    marginTop: 10,
+                                    padding: hp(1),
+                                    borderRadius: hp(.4),
+                                    marginRight: hp(1),
+                                    width: hp(12),
+                                    marginTop: hp(1),
                                 }}
                             >
                                 <Text

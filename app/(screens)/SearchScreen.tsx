@@ -58,12 +58,12 @@ export default function SearchScreen() {
     }
 
     return (
-        <View style={{ backgroundColor: 'black', flex: 1, paddingTop: 50 }}>
+        <View style={{ backgroundColor: 'black', flex: 1, paddingTop: hp(5) }}>
             <View style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                paddingHorizontal: 15,
-                marginBottom: 20
+                paddingHorizontal: hp(1.3),
+                marginBottom: hp(1.4)
             }}>
                 <TextInput
                     autoFocus
@@ -73,24 +73,25 @@ export default function SearchScreen() {
                     style={{
                         color: 'white',
                         flex: 1,
-                        borderBottomWidth: 1,
+                        borderBottomWidth: hp(.2),
                         borderBottomColor: 'lightgray',
-                        paddingVertical: 8,
-                        paddingHorizontal: 10,
+                        paddingVertical: hp(.7),
+                        paddingHorizontal: hp(1),
                         backgroundColor: '#222',
-                        borderRadius: 8,
+                        borderRadius: hp(1),
+                        fontSize: hp(2)
                     }}
                 />
                 <TouchableOpacity
                     onPress={() => router.push('/(screens)/HomeScreen')}
                     style={{
-                        marginLeft: 10,
+                        marginLeft: hp(1),
                         backgroundColor: '#555',
-                        padding: 8,
-                        borderRadius: 50,
+                        padding: hp(.7),
+                        borderRadius: wp(100),
                     }}
                 >
-                    <Entypo name="cross" size={30} color="white" />
+                    <Entypo name="cross" size={hp(3.5)} color="white" />
                 </TouchableOpacity>
             </View>
 
@@ -101,17 +102,17 @@ export default function SearchScreen() {
                     results.length > 0 ? (
                         <ScrollView
                             showsVerticalScrollIndicator={false}
-                            contentContainerStyle={{ paddingHorizontal: 15 }}
+                            contentContainerStyle={{ paddingHorizontal: hp(1) }}
                         >
                             <Text style={{
-                                fontSize: 30,
+                                fontSize: hp(3),
                                 color: 'white',
-                                marginBottom: 10,
+                                marginBottom: hp(1),
                                 fontWeight: 'bold',
                             }}>
                                 Results
                             </Text>
-                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 20, justifyContent: 'space-between' }}>
+                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: hp(1.5), justifyContent: 'space-between' }}>
                                 {
                                     results.map((item: any, index: number) => (
                                         item.poster_path && <TouchableWithoutFeedback
@@ -120,27 +121,27 @@ export default function SearchScreen() {
                                         >
                                             <View style={{
                                                 backgroundColor: '#444',
-                                                borderRadius: 15,
+                                                borderRadius: hp(1),
                                                 shadowColor: '#000',
                                                 shadowOffset: { width: 0, height: 2 },
                                                 shadowOpacity: 0.8,
                                                 shadowRadius: 5,
                                                 elevation: 5,
-                                                width: 170,
-                                                padding: 5
+                                                width: wp(42),
+                                                padding: hp(.3)
                                             }}>
                                                 <Image
                                                     source={item.poster_path && { uri: image185(item.poster_path) }}
                                                     style={{
                                                         width: '100%',
-                                                        height: 200,
-                                                        borderRadius: 10,
+                                                        height: hp(25),
+                                                        borderRadius: hp(1),
+                                                        resizeMode: 'stretch'
                                                     }}
-                                                    resizeMode="contain"
                                                 />
                                                 <Text style={{
                                                     color: 'white',
-                                                    fontSize: 18,
+                                                    fontSize: hp(2),
                                                     fontWeight: '500',
                                                     textAlign: 'center'
                                                 }}>
@@ -155,9 +156,9 @@ export default function SearchScreen() {
                     ) : (
                         <View>
                             <Text style={{
-                                fontSize: 30,
+                                fontSize: hp(3.5),
                                 fontWeight: '500',
-                                marginTop: 300,
+                                marginTop: hp(40),
                                 textAlign: 'center',
                                 color: 'white'
                             }}>
@@ -167,6 +168,6 @@ export default function SearchScreen() {
                     )
                 )
             }
-        </View>
+        </View >
     );
 }

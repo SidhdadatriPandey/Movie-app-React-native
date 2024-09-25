@@ -44,14 +44,14 @@ const TicketScreen = () => {
                 style={{
                     backgroundColor: "white",
                     height: "90%",
-                    margin: 10,
-                    borderRadius: 6,
-                    marginTop: 45
+                    margin: hp(1),
+                    borderRadius: hp(.4),
+                    marginTop: hp(4.5)
                 }}
             >
                 <View
                     style={{
-                        padding: 10,
+                        padding: hp(1),
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "space-between",

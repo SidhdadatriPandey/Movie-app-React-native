@@ -8,17 +8,15 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default function Cast({ cast }: any) {
   let characterName = "Sidhdadatri Pandey jii";
   let personName = "Sidhdadatri Pandey son of Ramswaroop Pandey";
-  console.log('cast', cast);
+  // console.log('cast', cast);
 
   return (
-    <View style={{ marginVertical: 20 }}>
+    <View style={{ marginVertical: hp(1.5) }}>
       {
         cast.length > 0 && <Text
           style={{
             fontSize: hp(2.5),
-            // fontWeight: 'bold',
-            marginBottom: 10,
-            paddingHorizontal: 15,
+            marginBottom: hp(1),
             color: 'white',
           }}
         >
@@ -28,7 +26,7 @@ export default function Cast({ cast }: any) {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 15 }}
+        contentContainerStyle={{ paddingHorizontal: 0 }}
       >
         {cast &&
           cast.map((person: any, index: any) => {
@@ -36,12 +34,12 @@ export default function Cast({ cast }: any) {
               person.profile_path && <TouchableOpacity
                 key={index}
                 style={{
-                  marginRight: 15,
+                  marginRight: hp(1),
                   backgroundColor: '#333',
-                  padding: 10,
-                  borderRadius: 10,
+                  padding: hp(1),
+                  borderRadius: hp(1),
                   alignItems: 'center',
-                  gap: 5
+                  gap: hp(.5)
                 }}
 
                 onPress={() => router.push({
@@ -51,12 +49,10 @@ export default function Cast({ cast }: any) {
                     character: person.character,
                     original_name: person.original_name,
                     id: person.id,
-                    // person: JSON.stringify(person),
-                    // person
                   }
                 })}
               >
-                <View style={{ borderRadius: wp(100), overflow: 'hidden', padding: 3, backgroundColor: 'white', height: hp(20), width: hp(20), alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ borderRadius: wp(100), overflow: 'hidden', padding: hp(2), backgroundColor: 'blue', height: hp(20), width: hp(20), alignItems: 'center', justifyContent: 'center' }}>
                   <Image
                     source={{ uri: image185(person.profile_path) }}
                     style={{ height: hp(19), width: hp(19), borderRadius: wp(100), resizeMode: 'stretch' }}

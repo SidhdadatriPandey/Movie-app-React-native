@@ -32,8 +32,8 @@ export default function PersonScreen() {
     async function getPersonMovies(id: any) {
         const data = await fetchPersonMovies(id);
         // console.log('get person movies', data); 
-        console.log('get person movies cast only', data.cast);
-        console.log(typeof (data.cast));
+        // console.log('get person movies cast only', data.cast);
+        // console.log(typeof (data.cast));
         if (data && data.cast) setPersonMovies(data.cast)
         setLoading(false);
     }
@@ -45,9 +45,10 @@ export default function PersonScreen() {
                 paddingTop: 50,
                 backgroundColor: 'black',
                 paddingHorizontal: 10,
+                minHeight: hp(100)
             }}
         >
-            <SafeAreaView
+            {/* <SafeAreaView
                 style={{
                     width: '100%',
                     flexDirection: 'row',
@@ -77,13 +78,43 @@ export default function PersonScreen() {
                 >
                     <AntDesign name="heart" size={hp(4)} color={liked ? "red" : "white"} />
                 </TouchableOpacity>
+            </SafeAreaView> */}
+            <SafeAreaView
+                style={{
+                    width: '100%',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: hp(2),
+                }}
+            >
+                <TouchableOpacity
+                    style={{
+                        padding: hp(1.5),
+                        backgroundColor: 'rgba(0, 122, 255, 0.8)',
+                        borderRadius: wp(100),
+                    }}
+                    onPress={() => router.back()}
+                >
+                    <AntDesign name="caretleft" size={hp(4)} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        padding: hp(1.5),
+                        backgroundColor: 'rgba(0, 122, 255, 0.8)',
+                        borderRadius: wp(100),
+                    }}
+                    onPress={() => setLiked(!liked)}
+                >
+                    <AntDesign name="heart" size={hp(4)} color={liked ? "red" : "white"} />
+                </TouchableOpacity>
             </SafeAreaView>
 
             {loading ? (
                 <Loading />
             ) : (
                 <View>
-                    <View style={{ alignItems: 'center', marginTop: 40, marginBottom: 10 }}>
+                    <View style={{ alignItems: 'center', marginTop: hp(2), marginBottom: hp(1) }}>
                         <View
                             style={{
                                 borderRadius: wp(100),
@@ -104,14 +135,14 @@ export default function PersonScreen() {
                         </View>
                     </View>
 
-                    <View style={{ alignItems: 'center', marginBottom: 50 }}>
-                        <Text style={{ color: 'white', fontSize: hp(4), fontWeight: 'bold' }}>
+                    <View style={{ alignItems: 'center', marginBottom: hp(3) }}>
+                        <Text style={{ color: 'white', fontSize: hp(4), fontWeight: 'bold', textAlign: 'center' }}>
                             {character}
                         </Text>
-                        <Text style={{ color: 'gray', fontSize: hp(2.5) }}>
+                        <Text style={{ color: 'gray', fontSize: hp(2.5), textAlign: 'center' }}>
                             {original_name}
                         </Text>
-                        <Text style={{ color: 'gray', fontSize: hp(2.5) }}>
+                        <Text style={{ color: 'gray', fontSize: hp(2.5), textAlign: 'center' }}>
                             {person?.place_of_birth}
                         </Text>
                     </View>
@@ -143,11 +174,11 @@ export default function PersonScreen() {
                         </View>
                     </View>
 
-                    <View style={{ marginVertical: 14 }}>
+                    <View style={{ marginVertical: hp(1.3) }}>
                         <Text style={{ color: 'white', fontSize: hp(3) }}>Biography</Text>
                         <Text style={{ color: 'gray', fontSize: hp(1.8) }}>{person?.biography}</Text>
                     </View>
-                    {/* <MovieList title={'Movie'} hideSeeAll={true} person={personMovies} /> */}
+                    <MovieList title={'Movie'} hideSeeAll={true} data={personMovies} />
                 </View>
 
             )}

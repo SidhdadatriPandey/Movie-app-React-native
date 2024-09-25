@@ -20,7 +20,7 @@ const searchMovieEndPoints = `${apiBaseUrl}/search/movie?api_key=${apiKey}`;
 // Fallback poster URL
 export const fallbackMoviePoster = 'https://via.placeholder.com/500x750?text=No+Image+Available';
 
-// API call function
+// API call function                        
 const apiCall = async (endpoint: string, params?: any) => {
     const options = {
         method: 'GET',

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#000', // Fallback background color
+        backgroundColor: '#000',
     },
     container: {
         alignItems: 'center',
@@ -54,19 +54,19 @@ const styles = StyleSheet.create({
     title: {
         fontSize: hp(7.2),
         fontWeight: 'bold',
-        color: '#FFD700', // Gold color for cinematic effect
+        color: '#FFD700',
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: { width: -1, height: 1 },
-        textShadowRadius: 10,
+        textShadowRadius: hp(1),
     },
     highlighted: {
         fontSize: hp(7.2),
-        color: '#FFF', // White color for contrast
+        color: '#FFF',
     },
     subtitle: {
         color: '#FFF',
         fontSize: hp(2.8),
-        marginTop: 10,
+        marginTop: hp(1),
         fontStyle: 'italic',
     },
 });

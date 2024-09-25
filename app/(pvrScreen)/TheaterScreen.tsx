@@ -13,7 +13,7 @@ import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { router } from "expo-router";
 import { MoviesCards, moviesType } from "@/app/context1";
-
+// import RazorpayCheckout from 'react-native-razorpay';
 
 // Define context type for MoviesCards
 type MoviesCardsContext = {
@@ -54,7 +54,7 @@ const TheaterScreen: React.FC = () => {
                 {seats.map((seat, index) => (
                     <Text
                         key={index}
-                        style={{ marginTop: 4, fontSize: 17, paddingHorizontal: 4 }}
+                        style={{ marginTop: hp(.3), fontSize: hp(1.7), paddingHorizontal: hp(.3) }}
                     >
                         {seat}
                     </Text>
@@ -65,6 +65,7 @@ const TheaterScreen: React.FC = () => {
 
 
     function handleOnPress() {
+
 
         movies.map((itm: any, index: number) => {
             if (itm.name === route.params.name) {
@@ -105,30 +106,32 @@ const TheaterScreen: React.FC = () => {
 
     const tempData = route.params.tableSeats.split(",")
     return (
-        <SafeAreaView style={{ paddingBottom: 330 }}>
+        <SafeAreaView style={{
+            // paddingBottom: 330 
+        }}>
             <View
                 style={{
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    marginTop: 40,
+                    marginTop: hp(5),
                 }}
             >
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <Ionicons
                         onPress={() => navigation.goBack()}
-                        style={{ marginLeft: 5 }}
+                        style={{ marginLeft: hp(.6) }}
                         name="arrow-back"
                         size={hp(3)}
                         color="black"
                     />
-                    <View style={{ marginLeft: 6 }}>
+                    <View style={{ marginLeft: hp(.8) }}>
                         <Text style={{ fontSize: hp(2), fontWeight: "600" }}>
                             {route.params.name}
                         </Text>
                         <Text
                             style={{
-                                marginTop: 2,
+                                marginTop: hp(.1),
                                 color: "gray",
                                 fontSize: hp(1.7),
                                 fontWeight: "500",
@@ -147,7 +150,7 @@ const TheaterScreen: React.FC = () => {
                     textAlign: "center",
                     fontSize: hp(2),
                     fontWeight: "bold",
-                    marginTop: 10,
+                    marginTop: hp(1),
                 }}
             >
                 {route.params.timeSelected}
@@ -157,7 +160,7 @@ const TheaterScreen: React.FC = () => {
                 style={{
                     textAlign: "center",
                     fontSize: hp(1.7),
-                    marginTop: 10,
+                    marginTop: hp(.5),
                     color: "gray",
                 }}
             >
@@ -186,8 +189,8 @@ const TheaterScreen: React.FC = () => {
                             {
                                 seats.includes(item) ? (
                                     <Text style={{
-                                        backgroundColor: "#ffc40c", padding: 8, fontSize: hp(2), borderWidth: 1,
-                                        borderRadius: 5,
+                                        backgroundColor: "#ffc40c", padding: hp(.6), fontSize: hp(2), borderWidth: hp(.15),
+                                        borderRadius: hp(.4),
                                     }}>{item}</Text>
                                 ) : (
                                     (() => {
@@ -202,14 +205,14 @@ const TheaterScreen: React.FC = () => {
                                         if (found) {
                                             return (
                                                 <Text style={{
-                                                    backgroundColor: "#989898", padding: 8, fontSize: hp(2), borderWidth: 1,
-                                                    borderRadius: 5,
+                                                    backgroundColor: "#989898", padding: hp(.6), fontSize: hp(2), borderWidth: hp(.15),
+                                                    borderRadius: hp(.4),
                                                 }}>{item}</Text>
                                             );
                                         } else {
                                             return <Text style={{
-                                                padding: 8, fontSize: hp(2), borderWidth: 1,
-                                                borderRadius: 5,
+                                                padding: hp(.6), fontSize: hp(2), borderWidth: hp(.15),
+                                                borderRadius: hp(.4),
                                             }}>{item}</Text>;
                                         }
                                     })()
@@ -230,15 +233,15 @@ const TheaterScreen: React.FC = () => {
                     alignItems: "center",
                     justifyContent: 'center',
                     // paddingLeft: 100,
-                    marginTop: 20,
+                    marginTop: hp(1.5),
                     backgroundColor: "#D8D8D8",
-                    padding: 10,
-                    gap: 15,
+                    padding: hp(1),
+                    gap: hp(1.4),
                 }}
             >
                 <View>
                     <FontAwesome
-                        style={{ textAlign: "center", marginBottom: 4 }}
+                        style={{ textAlign: "center", marginBottom: hp(.3) }}
                         name="square"
                         size={hp(3)}
                         color="#ffc40c"
@@ -248,7 +251,7 @@ const TheaterScreen: React.FC = () => {
 
                 <View>
                     <FontAwesome
-                        style={{ textAlign: "center", marginBottom: 4 }}
+                        style={{ textAlign: "center", marginBottom: hp(.3) }}
                         name="square"
                         size={hp(3)}
                         color='white'
@@ -258,7 +261,7 @@ const TheaterScreen: React.FC = () => {
 
                 <View>
                     <FontAwesome
-                        style={{ textAlign: "center", marginBottom: 4 }}
+                        style={{ textAlign: "center", marginBottom: hp(.3) }}
                         name="square"
                         size={hp(3)}
                         color="#989898"
@@ -272,11 +275,11 @@ const TheaterScreen: React.FC = () => {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    marginTop: 14,
+                    marginTop: hp(1.3),
                 }}
             >
-                <View style={{ padding: 10 }}>
-                    <Text style={{ marginBottom: 4, fontSize: hp(1.7), fontWeight: "500" }}>
+                <View style={{ padding: hp(1) }}>
+                    <Text style={{ marginBottom: hp(.3), fontSize: hp(1.7), fontWeight: "500" }}>
                         Show end time approx 6:51 PM
                     </Text>
 
@@ -286,24 +289,24 @@ const TheaterScreen: React.FC = () => {
                 <View
                     style={{
                         backgroundColor: "#E0E0E0",
-                        padding: 10,
-                        borderTopLeftRadius: 6,
-                        borderBottomLeftRadius: 6,
-                        marginTop: 10,
+                        padding: hp(1),
+                        borderTopLeftRadius: hp(.4),
+                        borderBottomLeftRadius: hp(.4),
+                        marginTop: hp(1),
                     }}
                 >
-                    <Text style={{ fontSize: hp(1.7) }}>Now with ticket cancellation</Text>
+                    <Text style={{ fontSize: hp(1.6) }}>Now with ticket cancellation</Text>
                 </View>
             </View>
 
             <Pressable
                 style={{
                     backgroundColor: "#ffc40c",
-                    padding: 20,
+                    padding: hp(1.6),
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    marginVertical: 20,
+                    marginVertical: hp(1.6),
                 }}
             >
                 {seats.length > 0 ? (

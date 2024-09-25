@@ -28,28 +28,11 @@ export default function RootLayout() {
   }
 
   return (
-
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/* <MovieContext> */}
       <Stack initialRouteName="index" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(screens)" />
         <Stack.Screen name='index' />
-        {/* <Stack.Screen name='homeScreen' />
-        <Stack.Screen name='movieScreen' />
-        <Stack.Screen name='theaterScreen' />
-        <Stack.Screen name='tcketScreen' /> */}
       </Stack>
-      {/* </MovieContext> */}
-
-
     </ThemeProvider>
   );
 }
-
-{/* <MovieContext>
-        <Stack initialRouteName="index" screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(screens)" />
-          <Stack.Screen name='index' />
-        </Stack>
-      </MovieContext> */}
-
