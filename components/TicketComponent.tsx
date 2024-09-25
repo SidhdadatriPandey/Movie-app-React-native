@@ -21,10 +21,10 @@ const TicketComponent = () => {
                             position: "absolute",
                             height: hp(15),
                             backgroundColor: "white",
-                            padding: 10,
-                            borderRadius: 6,
+                            padding: hp(1),
+                            borderRadius: hp(.3),
                             marginHorizontal: 'auto',
-                            top: 140,
+                            top: hp(13),
                             // left: 40,
                             width: "82%",
                             borderWidth: 2,
@@ -39,7 +39,7 @@ const TicketComponent = () => {
                                 alignItems: "center",
                                 // margin: 'auto',
                                 justifyContent: "space-between",
-                                marginTop: 10,
+                                marginTop: hp(1),
                             }}
                         >
                             <View>
@@ -48,12 +48,12 @@ const TicketComponent = () => {
                             </View>
 
                         </View>
-                        <Text style={{ marginTop: 8, fontSize: hp(1.7), fontWeight: "500" }}>{item.mall}</Text>
+                        <Text style={{ marginTop: hp(.3), fontSize: hp(1.7), fontWeight: "500" }}>{item.mall}</Text>
                     </Pressable>
                 </ImageBackground>
             ))}
 
-            <View style={{ marginTop: 110, }} />
+            <View style={{ marginTop: hp(10), }} />
 
 
         </View>

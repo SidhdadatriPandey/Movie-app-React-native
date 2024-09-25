@@ -68,7 +68,7 @@ const TicketScreen = () => {
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        marginHorizontal: 10,
+                        marginHorizontal: hp(1),
                     }}
                 >
                     <Text style={{ fontSize: hp(2), color: "gray" }}>HINDI - 2D</Text>
@@ -80,8 +80,8 @@ const TicketScreen = () => {
                     style={{
                         fontSize: hp(2),
                         fontWeight: "600",
-                        marginHorizontal: 10,
-                        marginTop: 9,
+                        marginHorizontal: hp(1),
+                        marginTop: hp(1),
                     }}
                 >
                     {route.params.mall}
@@ -92,21 +92,21 @@ const TicketScreen = () => {
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        marginTop: 20
+                        marginTop: hp(2)
                     }}
                 >
-                    <View style={{ marginTop: 10, marginLeft: 10 }}>
+                    <View style={{ marginTop: hp(1), marginLeft: hp(1) }}>
                         <Text style={{ color: "gray", fontSize: hp(1.7), fontWeight: "500" }}>
                             DATE & TIME
                         </Text>
-                        <Text style={{ marginVertical: 4, fontSize: hp(1.7) }}>
+                        <Text style={{ marginVertical: hp(.3), fontSize: hp(1.7) }}>
                             {route.params.timeSelected}
                         </Text>
 
                     </View>
 
                     <Image
-                        style={{ aspectRatio: 4 / 2, height: hp(12), borderRadius: 6, resizeMode: 'stretch' }}
+                        style={{ aspectRatio: 4 / 2, height: hp(8), borderRadius: hp(.3), resizeMode: 'stretch' }}
                         source={{ uri: route.params.image }}
                     />
                 </View >
@@ -116,17 +116,17 @@ const TicketScreen = () => {
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        marginTop: 20
+                        marginTop: hp(1.6)
                     }}
                 >
-                    <View style={{ marginLeft: 14 }}>
+                    <View style={{ marginLeft: hp(1) }}>
                         <Text style={{ fontSize: hp(1.7) }}>AUDI NO</Text>
                         <Text
                             style={{
                                 textAlign: "center",
                                 fontSize: hp(1.7),
                                 fontWeight: "bold",
-                                marginTop: 6,
+                                marginTop: hp(.3),
                             }}
                         >
                             2
@@ -139,7 +139,7 @@ const TicketScreen = () => {
                             style={{
                                 textAlign: "center",
                                 fontWeight: "bold",
-                                marginTop: 6,
+                                marginTop: hp(.3),
                                 fontSize: hp(1.7)
                             }}
                         >
@@ -147,7 +147,7 @@ const TicketScreen = () => {
                         </Text>
                     </View>
 
-                    <View style={{ marginRight: 15 }}>
+                    <View style={{ marginRight: hp(1.2) }}>
                         <Text style={{ fontSize: hp(1.7) }}>SEATS</Text>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             {Array.isArray(selectedSeatsData) &&
@@ -155,10 +155,11 @@ const TicketScreen = () => {
                                     <Text
                                         key={index}
                                         style={{
-                                            margin: 3,
+                                            margin: hp(.2),
                                             fontSize: hp(1.7),
                                             fontWeight: "bold",
-                                            marginTop: 6,
+                                            marginTop: hp(.3),
+                                            textAlign: 'center'
                                         }}
                                     >
                                         {item}
@@ -173,12 +174,12 @@ const TicketScreen = () => {
                     style={{
                         // height: 140,
                         backgroundColor: "#8DA399",
-                        borderRadius: 6,
-                        marginVertical: 20,
-                        padding: 10
+                        borderRadius: hp(.3),
+                        marginVertical: hp(1),
+                        padding: hp(1)
                     }}
                 >
-                    <View style={{ padding: 10 }}>
+                    <View style={{ padding: hp(1) }}>
                         <Text style={{ fontSize: hp(2), fontWeight: "bold" }}>
                             Price Details
                         </Text>
@@ -187,7 +188,7 @@ const TicketScreen = () => {
                                 flexDirection: "row",
                                 alignItems: "center",
                                 justifyContent: "space-between",
-                                marginTop: 4,
+                                marginTop: hp(1),
                             }}
                         >
                             <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
@@ -219,7 +220,7 @@ const TicketScreen = () => {
                                 flexDirection: "row",
                                 alignItems: "center",
                                 justifyContent: "space-between",
-                                marginTop: 4,
+                                marginTop: hp(.2),
                             }}
                         >
                             <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
@@ -235,35 +236,25 @@ const TicketScreen = () => {
                                 flexDirection: "row",
                                 alignItems: "center",
                                 justifyContent: "space-between",
-                                marginTop: 4,
+                                marginTop: hp(.2),
                             }}
                         >
                             <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 ID NO
                             </Text>
-                            <Text style={{ color: "white", fontSize: 16, fontWeight: "500" }}>
+                            <Text style={{ color: "white", fontSize: hp(1.7), fontWeight: "500" }}>
                                 FGSJSDN3493943
                             </Text>
                         </View>
                     </View>
                 </View>
 
-                <Text
-                    style={{
-                        borderRadius: 1,
-                        borderStyle: "dashed",
-                        borderColor: "#DCDCDC",
-                        height: 1,
-                        borderWidth: 0.5,
-                        margin: 10,
-                    }}
-                />
                 <View
                     style={{
                         justifyContent: "center",
                         alignItems: "center",
-                        marginTop: 10,
-                        marginBottom: 20,
+                        marginTop: hp(1),
+                        marginBottom: hp(2),
                     }}
                 >
                     <SvgQRCode value={"hello"} size={hp(15)} />
@@ -276,10 +267,10 @@ const TicketScreen = () => {
                         backgroundColor: "green",
                         marginLeft: "auto",
                         marginRight: "auto",
-                        width: 120,
-                        borderRadius: 4,
-                        padding: 10,
-                        marginTop: 10
+                        width: hp(15),
+                        borderRadius: hp(.2),
+                        padding: hp(1),
+                        marginTop: hp(1)
                     }}
                     onPress={() => router.push('/HomeScreen')}
                 >
